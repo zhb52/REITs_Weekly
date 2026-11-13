@@ -27,6 +27,8 @@ def build_facts(
     source_meta: dict | None = None,
     index_snapshot: pd.DataFrame | None = None,
     yields: pd.DataFrame | None = None,
+    pending: pd.DataFrame | None = None,
+    event_metrics: pd.DataFrame | None = None,
 ) -> FactsBundle:
     """计算并登记全部事实。
 
@@ -114,6 +116,38 @@ def build_facts(
             bundle.add("yield.chg_bp", (cur - prev) * 100.0, unit="bp", decimals=1,
                        formula="(cur-prev)*100", params={"code": code},
                        source=src, section_hint=["2.1"])
+
+    # ---------------------------------------------------------- 一级市场
+    if pending is not None and len(pending):
+        total = int(len(pending))
+        by_status = pending["status"].value_counts().to_dict()
+        by_cat = pending["category"].value_counts().to_dict()
+        ipo = sum(v for k, v in by_cat.items() if "扩募" not in str(k))
+        exp = sum(v for k, v in by_cat.items() if "扩募" in str(k))
+
+        bundle.add("pending.total", total, unit="只",
+                   formula="count(primary_pipeline)", source=src, section_hint=["0.2", "2.2"])
+        bundle.add("pending.ipo", ipo, unit="只",
+                   formula="count(category != 扩募)", source=src, section_hint=["2.2"])
+        bundle.add("pending.expansion", exp, unit="只",
+                   formula="count(category == 扩募)", source=src, section_hint=["2.2"])
+        for status, n in by_status.items():
+            bundle.add("pending.status", int(n), unit="只",
+                       formula="count by status", params={"status": str(status)},
+                       source=src, section_hint=["2.2"])
+        for cat, n in by_cat.items():
+            bundle.add("pending.category", int(n), unit="只",
+                       formula="count by category", params={"category": str(cat)},
+                       source=src, section_hint=["2.2"])
+
+    if event_metrics is not None and len(event_metrics):
+        for _, row in event_metrics.iterrows():
+            dec = int(row["decimals"]) if "decimals" in row and pd.notna(row["decimals"]) else 2
+            bundle.add(str(row["metric"]), float(row["value"]), unit=str(row["unit"]),
+                       decimals=dec,
+                       formula="announcement_transcription",
+                       params={"note": str(row.get("note", ""))[:40]},
+                       source=src, section_hint=["2.2", "2.3", "2.4"])
 
     # ---------------------------------------------------------- 板块收益
     agg = _boards.board_aggregate(q, weight_col="mktcap_float")

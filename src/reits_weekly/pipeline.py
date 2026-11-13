@@ -68,6 +68,7 @@ class CaseResult:
     index_series: pd.DataFrame
     facts: FactsBundle
     board_conflicts: list[dict] = field(default_factory=list)
+    pending: pd.DataFrame | None = None
     source_meta: dict = field(default_factory=dict)
 
 
@@ -129,12 +130,28 @@ def prepare(
     except Exception:
         yields_df = pd.DataFrame()
 
+    try:
+        pending = adapter.primary_pipeline()
+    except Exception:
+        pending = pd.DataFrame()
+    try:
+        ev_metrics = adapter.event_metrics()
+    except Exception:
+        ev_metrics = pd.DataFrame()
+
     facts = build_facts(
         quotes, turnover, week, case_id,
         adapter.meta.raw_hash, boards, adapter.meta.as_dict(),
         index_snapshot=snapshot,
         yields=yields_df,
+        pending=pending,
+        event_metrics=ev_metrics,
     )
+
+    try:
+        pending_df = adapter.primary_pipeline()
+    except Exception:
+        pending_df = None
 
     return CaseResult(
         case_id=case_id,
@@ -145,6 +162,7 @@ def prepare(
         index_series=index_df,
         facts=facts,
         board_conflicts=conflicts,
+        pending=pending_df,
         source_meta=adapter.meta.as_dict(),
     )
 

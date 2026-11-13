@@ -2,8 +2,8 @@
   {
     "id": "G-NUM-01",
     "ok": true,
-    "detail": "0/110 个数字无法回溯到事实库",
-    "checked": 110,
+    "detail": "0/134 个数字无法回溯到事实库",
+    "checked": 134,
     "failed": 0,
     "samples": []
   },
@@ -42,18 +42,18 @@
   {
     "id": "G-STYLE-01",
     "ok": true,
-    "detail": "结构完整；3 节标注数据缺口",
+    "detail": "结构完整；0 节标注数据缺口",
     "checked": 0,
     "failed": 0,
     "samples": [
-      "数据缺口节: ['2.2', '2.3', '2.4']"
+      "数据缺口节: []"
     ]
   },
   {
     "id": "G-SRC-01",
     "ok": true,
-    "detail": "扫描 56 个文本文件，未发现凭证",
-    "checked": 56,
+    "detail": "扫描 72 个文本文件，未发现凭证",
+    "checked": 72,
     "failed": 0,
     "samples": []
   }

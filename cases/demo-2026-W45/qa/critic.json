@@ -1,0 +1,149 @@
+{
+  "overall": 4.85,
+  "verdict": "accept",
+  "high_issues": [],
+  "sections": [
+    {
+      "sid": "0.1",
+      "logic": 5,
+      "evidence": 5,
+      "caliber": 5,
+      "restraint": 5,
+      "continuity": 5,
+      "issues": [],
+      "mean": 5.0
+    },
+    {
+      "sid": "0.2",
+      "logic": 5,
+      "evidence": 3,
+      "caliber": 5,
+      "restraint": 5,
+      "continuity": 5,
+      "issues": [
+        "多处判断但无任何不确定性表述，事实与推断边界模糊"
+      ],
+      "mean": 4.6
+    },
+    {
+      "sid": "0.3",
+      "logic": 5,
+      "evidence": 5,
+      "caliber": 5,
+      "restraint": 5,
+      "continuity": 5,
+      "issues": [],
+      "mean": 5.0
+    },
+    {
+      "sid": "1.1",
+      "logic": 4,
+      "evidence": 5,
+      "caliber": 5,
+      "restraint": 5,
+      "continuity": 5,
+      "issues": [
+        "缺少明确判断句，偏于资料罗列"
+      ],
+      "mean": 4.8
+    },
+    {
+      "sid": "1.3",
+      "logic": 5,
+      "evidence": 5,
+      "caliber": 5,
+      "restraint": 5,
+      "continuity": 5,
+      "issues": [],
+      "mean": 5.0
+    },
+    {
+      "sid": "1.4",
+      "logic": 5,
+      "evidence": 5,
+      "caliber": 5,
+      "restraint": 5,
+      "continuity": 5,
+      "issues": [],
+      "mean": 5.0
+    },
+    {
+      "sid": "1.5",
+      "logic": 5,
+      "evidence": 5,
+      "caliber": 5,
+      "restraint": 5,
+      "continuity": 5,
+      "issues": [],
+      "mean": 5.0
+    },
+    {
+      "sid": "2.1",
+      "logic": 5,
+      "evidence": 5,
+      "caliber": 5,
+      "restraint": 5,
+      "continuity": 5,
+      "issues": [],
+      "mean": 5.0
+    },
+    {
+      "sid": "2.2",
+      "logic": 5,
+      "evidence": 3,
+      "caliber": 5,
+      "restraint": 5,
+      "continuity": 5,
+      "issues": [
+        "多处判断但无任何不确定性表述，事实与推断边界模糊"
+      ],
+      "mean": 4.6
+    },
+    {
+      "sid": "2.3",
+      "logic": 5,
+      "evidence": 5,
+      "caliber": 3,
+      "restraint": 5,
+      "continuity": 5,
+      "issues": [
+        "提及口径敏感指标但未声明口径"
+      ],
+      "mean": 4.6
+    },
+    {
+      "sid": "2.4",
+      "logic": 5,
+      "evidence": 5,
+      "caliber": 5,
+      "restraint": 4,
+      "continuity": 5,
+      "issues": [
+        "含预测性表述但未给出条件或验证方式"
+      ],
+      "mean": 4.8
+    },
+    {
+      "sid": "2.5",
+      "logic": 5,
+      "evidence": 3,
+      "caliber": 5,
+      "restraint": 5,
+      "continuity": 5,
+      "issues": [
+        "多处判断但无任何不确定性表述，事实与推断边界模糊"
+      ],
+      "mean": 4.6
+    },
+    {
+      "sid": "risk",
+      "logic": 5,
+      "evidence": 5,
+      "caliber": 5,
+      "restraint": 5,
+      "continuity": 5,
+      "issues": [],
+      "mean": 5.0
+    }
+  ]
+}

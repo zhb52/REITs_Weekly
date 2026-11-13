@@ -100,6 +100,7 @@ def build_report(
     W.add_title(doc, f"公募REITs周报（{label}）")
 
     quotes = result.quotes
+    pending = getattr(result, "pending", None)
     comparable = quotes[quotes["close_prev"].notna()]
     pv = valuation.pnav_summary(comparable)
     by_board = valuation.pnav_by_board(comparable)
@@ -133,6 +134,9 @@ def build_report(
             W.add_source_note(doc, f"{source_label}；收盘价为前复权价格口径")
         elif sid == "1.3":
             pass
+        elif sid == "2.2" and pending is not None and len(pending):
+            T.pending_table(doc, pending)
+            W.add_source_note(doc, "上交所、深交所 REITs 项目动态")
         elif sid == "1.4":
             W.add_chart(doc, Path(charts_dir) / "chart_board_turnover.png")
             W.add_chart(doc, Path(charts_dir) / "chart_board_turnover_rate.png")

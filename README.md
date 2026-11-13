@@ -41,7 +41,7 @@
 | `src/reits_weekly/` | 主程序，见下方模块说明 |
 | `cases/demo-2026-W45/` | 一期完整产物：事实库、草稿、门禁结果、成品 docx、状态机 |
 | `fixtures/demo-2026-W45/` | 可分享的示例输入（公开行情）与期望输出 |
-| `tests/` | 67 项测试，含门禁自身与状态机的用例 |
+| `tests/` | 82 项测试，含门禁、Critic 与状态机的用例 |
 | `scripts/` | 环境引导、示例数据生成、指数序列提取、提交打包 |
 
 ### 源码结构
@@ -77,7 +77,7 @@ powershell -ExecutionPolicy Bypass -File scripts/bootstrap_venv.ps1
 python -m venv .venv
 ./.venv/Scripts/python.exe -m pip install -r requirements.in
 ./.venv/Scripts/python.exe -m pip install -e .
-./.venv/Scripts/python.exe -m pytest -q      # 67 passed
+./.venv/Scripts/python.exe -m pytest -q      # 82 passed
 ```
 
 ### 跑一期
@@ -137,9 +137,8 @@ pandas、numpy、PyYAML、openpyxl、lxml、requests、pytest）。中文字体�
 
 ## 已知边界
 
-- 一级市场、解禁、持有人行为三节缺数据源，正文显式标注"（数据缺口）"，**不以估算值填充**
-- 待上市清单（原报告第 5 张表）未生成，原因同上
-- Critic 评分细则已定义但未接入模型，当前由人工代行
+- Critic 是规则版而非模型版：可复现、可审计、零依赖，但判断不了论证的实质成立与否
+- 一级市场关键数值靠公告转录（`formula=announcement_transcription`），不是自动抓取
 - 原生 Word 图表未启用，默认 300dpi PNG（换取版式稳定）
 
 详见 `docs/design_note.md` 第 2.4 节。

@@ -112,7 +112,16 @@ def run(cfg: RunConfig, state: CaseState | None = None, force: bool = False) -> 
     drafts_path = case_dir / "drafts" / "drafts.md"
     composed_path = case_dir / "drafts" / "composed.json"
     sections: dict[str, str] = {}
-    if force or not state.is_fresh(composed_path, Stage.DRAFT.value, case_dir):
+
+    # 草稿阶段的新鲜度必须同时看**输入**。只看 composed.json 是不够的：
+    # 改 drafts.md 后 composed.json 并未变动，会被误判为"已完成"而跳过，
+    # 导致修改永远不生效——这是最容易让人怀疑"程序坏了"的一类 bug。
+    from .state import sha256_file as _sha
+
+    drafts_digest = _sha(drafts_path) if drafts_path.exists() else ""
+    drafts_changed = state.input_hashes.get("drafts.md") != drafts_digest
+
+    if force or drafts_changed or not state.is_fresh(composed_path, Stage.DRAFT.value, case_dir):
         raw = build.load_drafts(drafts_path)
         problems: list[str] = []
         for sid, text in raw.items():
@@ -131,6 +140,10 @@ def run(cfg: RunConfig, state: CaseState | None = None, force: bool = False) -> 
             json.dumps(sections, ensure_ascii=False, indent=2), encoding="utf-8"
         )
         state.record_artifact(composed_path, Stage.DRAFT.value, case_dir)
+        state.input_hashes["drafts.md"] = drafts_digest
+        # 草稿更新即意味着上一轮的"连续未过"计数失效，重新开始计
+        state.attempts.pop("HARD_GATES", None)
+        state.attempts.pop("CRITIC", None)
         state.advance(Stage.DRAFT.value, f"装配 {len(sections)} 节")
         state.advance(Stage.MERGE.value, "草稿合并")
     else:
@@ -165,8 +178,37 @@ def run(cfg: RunConfig, state: CaseState | None = None, force: bool = False) -> 
 
     state.advance(Stage.HARD_GATES.value, "七条门禁全部通过")
 
+    # ---------------------------------------------------------- 4b. Critic
+    # 门禁管"对不对"，Critic 管"成不成立"。两者都过才进入人工审批。
+    from .draft import critic as critic_mod
+
+    opinions = critic_mod.load_opinions(cfg.repo_root / "memory" / "opinions.yaml")
+    report = critic_mod.review(sections, result.facts, opinions)
+    critic_path = case_dir / "qa" / "critic.json"
+    critic_path.write_text(report.to_json(), encoding="utf-8")
+    state.record_artifact(critic_path, Stage.CRITIC.value, case_dir)
+
+    if report.verdict != "accept":
+        n = state.bump_attempt("CRITIC")
+        if n >= cfg.max_gate_rounds:
+            state.escalate(
+                f"Critic 连续 {n} 轮未通过（均分 {report.overall}）：{report.high_issues[:3]}"
+            )
+        else:
+            state.advance(Stage.CRITIC.value, f"均分 {report.overall}，需修订")
+            state.advance(Stage.REVISE.value, "；".join(report.high_issues[:3]))
+        state.save(case_dir)
+        return state
+
+    state.advance(Stage.CRITIC.value, f"Critic 均分 {report.overall}，接受")
+
     # ---------------------------------------------------------- 5. 人工审批
-    if not state.has_approval("HUMAN_REVIEW"):
+    # 审批必须绑定**当前这一版**草稿的哈希。若拿不到哈希（草稿没生成）则不认审批，
+    # 否则改了稿仍然算已批，审批就形同虚设。
+    from .state import sha256_file
+
+    composed_digest = sha256_file(composed_path) if composed_path.exists() else ""
+    if not composed_digest or not state.has_approval("HUMAN_REVIEW", composed_digest):
         state.status = Status.BLOCKED.value
         state.blocked_reason = "等待人工审批"
         state.resume_hint = "审阅 cases/<case>/out 下的草稿与 gate 结果，然后执行 approve"

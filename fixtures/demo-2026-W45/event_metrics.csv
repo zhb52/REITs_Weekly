@@ -1,0 +1,14 @@
+metric,value,unit,decimals,note
+listed.count,2,只,0,华安陆家嘴商业REIT 11/04、长城华能燃煤发电REIT 11/06
+listed.amount,59.28,亿元,2,27.30+31.98
+registered.count,5,单,0,东方红申能、建信天津临港、华夏华润置地、华夏大悦城、红土创新星河
+registered.amount,126.5,亿元,1,11/03 注册的三单合计拟募集
+release.count,1,只,0,中信建投沈阳国际软件园REIT
+release.shares_wan,7868.4,万份,1,战略配售解禁
+release.pct,26.228,%no_sign,3,占基金全部份额
+release.float_before,30.00,%no_sign,2,解禁前流通份额占比
+release.float_after,56.228,%no_sign,3,解禁后流通份额占比
+increase.count,3,家,0,华安陆家嘴、华安锦江、中金联东科创
+increase.min_amount,1500,万元,0,中金联东科创下限
+increase.max_amount,4000,万元,0,华安陆家嘴承诺不低于 4000 万元
+policy.count,2,项,0,五部门支持消费基建运用REITs；发改委推动水利REITs

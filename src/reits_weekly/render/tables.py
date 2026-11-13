@@ -235,3 +235,43 @@ def pnav_table(doc, by_board: pd.DataFrame, overall: dict) -> None:
 
     _row(table.rows[rows - 1], "全市场", overall["median"], overall["discount_pct"],
          overall["weighted"], overall["n_premium"], overall["n_discount"], bold=True)
+
+
+# --------------------------------------------------------------------- 表5
+
+
+PENDING_HEADERS = ["序号", "类别", "项目简称", "审核状态", "最近更新"]
+
+
+def pending_table(doc, pending: pd.DataFrame) -> None:
+    """待上市储备清单。列与样张一致（不含交易所与基金全称）。
+
+    类别列按类别分组留空，只在首行写一次 —— 与样张的处理一致，
+    避免 47 行里重复 47 次"商业不动产"。
+    """
+    data = pending.sort_values(["category", "seq"]).reset_index(drop=True)
+    table = doc.add_table(rows=len(data) + 1, cols=len(PENDING_HEADERS))
+    table.style = "Table Grid"
+    table.alignment = WD_TABLE_ALIGNMENT.CENTER
+    _set_col_widths(table, [0.10, 0.26, 0.34, 0.16, 0.14])
+
+    for j, h in enumerate(PENDING_HEADERS):
+        _write_cell(table.rows[0].cells[j], h, bold=True, size_pt=8.0)
+    _set_repeat_header(table.rows[0])
+
+    prev_cat = None
+    for i, row in data.iterrows():
+        cat = str(row["category"])
+        show_cat = cat if cat != prev_cat else ""
+        prev_cat = cat
+        values = [
+            str(int(row["seq"])),
+            show_cat,
+            str(row["name"]),
+            str(row["status"]),
+            str(row["updated"]),
+        ]
+        for j, v in enumerate(values):
+            align = WD_ALIGN_PARAGRAPH.LEFT if j == 2 else WD_ALIGN_PARAGRAPH.CENTER
+            _write_cell(table.rows[i + 1].cells[j], v, size_pt=8.0, align=align)
+        _set_row_height(table.rows[i + 1], 260)

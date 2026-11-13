@@ -47,6 +47,9 @@ class FixtureAdapter(MarketDataAdapter):
         self._yields = self._read("yields.csv")
         self._index = self._read("index_series.csv")
         self._snapshot = self._read("index_snapshot.csv")
+        self._events = self._read("events_weekly.csv")
+        self._pending = self._read("primary_pipeline.csv")
+        self._event_metrics = self._read("event_metrics.csv")
 
         self.meta = SourceMeta(
             source_id=f"fixture:{case_id}",
@@ -129,6 +132,24 @@ class FixtureAdapter(MarketDataAdapter):
         df = self._snapshot.copy()
         for c in ("close", "wow_pct", "ytd_pct"):
             df[c] = pd.to_numeric(df[c], errors="coerce")
+        return df
+
+    def weekly_events(self) -> pd.DataFrame:
+        """本周一级市场与公司行为事件（公开披露整理）。"""
+        return self._events.copy()
+
+    def primary_pipeline(self) -> pd.DataFrame:
+        """待上市储备清单。"""
+        return self._pending.copy()
+
+    def event_metrics(self) -> pd.DataFrame:
+        """从公告中转录的关键数值。
+
+        这些数字**不是计算出来的**，是从披露原文摘录的，因此 formula 标为
+        ``announcement_transcription``，与计算型事实区别对待。
+        """
+        df = self._event_metrics.copy()
+        df["value"] = pd.to_numeric(df["value"], errors="coerce")
         return df
 
     def health(self) -> SourceHealth:

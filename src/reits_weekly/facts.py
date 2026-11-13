@@ -67,8 +67,8 @@ def format_value(value: Any, unit: str, decimals: int) -> str:
         return fmt_ratio(value, decimals)
     if unit == "亿元":
         return fmt_yi(value, decimals)
-    if unit == "只":
-        return fmt_int(value)
+    if unit in ("只", "家", "单", "项", "万份"):
+        return fmt_int(value) if decimals == 0 else fmt_num(value, decimals)
     if unit == "%no_sign":
         return fmt_pct(value, decimals, sign=False)
     return fmt_num(value, decimals)

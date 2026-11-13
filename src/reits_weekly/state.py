@@ -97,6 +97,7 @@ class CaseState:
     status: str = Status.PENDING.value
     info_cutoff: str = ""
     input_hash: str = ""
+    input_hashes: dict[str, str] = field(default_factory=dict)
     attempts: dict[str, int] = field(default_factory=dict)
     artifacts: list[dict] = field(default_factory=list)
     gates: dict[str, dict] = field(default_factory=dict)
