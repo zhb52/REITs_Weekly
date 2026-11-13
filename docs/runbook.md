@@ -16,6 +16,11 @@ Windows PowerShell 用户可用 `scripts\bootstrap_venv.ps1` 一步完成。
 
 ## 每周常规流程
 
+> **前提：新一期需要新的数据。** 本项目自带的是 `fixtures/demo-2026-W45/`，
+> 换到 2026-W46 之前，必须把这一期的行情、成交、指数、事件等 CSV 放到
+> `fixtures/2026-W46/` 下（字段见 `docs/data_contract.md`）。
+> 缺数据时 `cli run` 会直接 BLOCKED 并提示该目录，不会用上一期数据凑数。
+
 ```bash
 # 1. 跑一期（数据取到 → 计算 → 图表 → 草稿 → 门禁）
 ./.venv/Scripts/python.exe -m reits_weekly.cli run --case 2026-W46 \

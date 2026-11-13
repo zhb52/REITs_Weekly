@@ -106,6 +106,7 @@ class CaseState:
     history: list[dict] = field(default_factory=list)
     blocked_reason: str = ""
     resume_hint: str = ""
+    ledger: dict = field(default_factory=dict)
 
     # ---------------------------------------------------------------- 持久化
 

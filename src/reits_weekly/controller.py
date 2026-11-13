@@ -106,9 +106,18 @@ def run(cfg: RunConfig, state: CaseState | None = None, force: bool = False) -> 
     facts_path = case_dir / "facts" / "facts.json"
     need_prep = force or not state.is_fresh(facts_path, Stage.FACTS.value, case_dir)
     if need_prep:
+        try:
+            adapter = pipeline.get_adapter(cfg.source, cfg.fixture(), cfg.case_id)
+        except FileNotFoundError as exc:
+            state.block(
+                f"找不到本期数据：{exc}",
+                f"请先把行情、成交等数据放到 {cfg.fixture()} 下；"
+                f"示例可参考 fixtures/demo-2026-W45",
+            )
+            state.save(case_dir)
+            return state
         state.advance(Stage.INGEST.value, "开始取数")
         state.advance(Stage.COMPUTE.value, "归一化与计算")
-        adapter = pipeline.get_adapter(cfg.source, cfg.fixture(), cfg.case_id)
         result = pipeline.prepare(adapter, week, boards, cfg.case_id)
         written = pipeline.write_artifacts(result, paths)
         for key, p in written.items():
@@ -198,6 +207,20 @@ def run(cfg: RunConfig, state: CaseState | None = None, force: bool = False) -> 
         encoding="utf-8",
     )
     state.record_artifact(gate_path, Stage.HARD_GATES.value, case_dir)
+
+    # ---- 问题台账：跨轮累积，未再出现的问题才关闭 ----
+    from .verify.findings import FindingLedger
+
+    ledger_path = case_dir / "qa" / "findings.json"
+    ledger = FindingLedger.load(ledger_path)
+    ledger.begin_round()
+    for r in results:
+        ledger.record(r.id, list(r.samples) if not r.ok else [])
+    ledger.save(ledger_path)
+    state.record_artifact(ledger_path, Stage.HARD_GATES.value, case_dir)
+    state.ledger = ledger.summary()
+    _log(state, f"问题台账：open={len(ledger.open())}，"
+                f"closed={len(ledger.closed())}，reopened={len(ledger.reopened())}")
 
     failed = [r for r in results if not r.ok]
     if failed:
@@ -304,4 +327,6 @@ def status(cfg: RunConfig) -> dict:
         "artifacts": len(state.artifacts),
         "approvals": len(state.approvals),
         "blocked_reason": state.blocked_reason,
+        "open_findings": (state.ledger or {}).get("open", 0),
+        "reopened_findings": (state.ledger or {}).get("reopened", 0),
     }

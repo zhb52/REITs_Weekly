@@ -37,33 +37,54 @@ def _cfg(args) -> controller.RunConfig:
     return cfg
 
 
-def main(argv: list[str] | None = None) -> int:
-    ap = argparse.ArgumentParser(prog="reits-weekly", description="公募REITs周报自动化")
-    ap.add_argument("--root", help="项目根目录，默认自动推断")
-    ap.add_argument("--case", default=None, help="期次标识，默认读 config/settings.yaml")
-    ap.add_argument("--source", default=None, help="数据源，默认 fixture")
-    ap.add_argument("--week-start", default=None)
-    ap.add_argument("--week-end", default=None)
-    ap.add_argument("--week-prev", default=None)
-    ap.add_argument("--cutoff", default=None,
-                    help="信息截止时点，晚于此的公告不得使用；默认读配置")
+def build_parser() -> argparse.ArgumentParser:
+    """构造解析器。抽成独立函数，便于测试直接断言参数行为而不执行命令。"""
+    # 公共参数同时挂在主解析器和各子命令上（子命令用 SUPPRESS 作默认值，
+    # 避免把主解析器已经取到的值覆盖成 None）。
+    # 这样 `cli run --case X` 与 `cli --case X run` 两种写法都能用 ——
+    # 之前只挂在主解析器上，导致 README 里写的 `run --case X` 直接报
+    # "unrecognized arguments"，照着文档敲就跑不起来。
+    common = argparse.ArgumentParser(add_help=False)
+    common.add_argument("--root", default=argparse.SUPPRESS,
+                        help="项目根目录，默认自动推断")
+    common.add_argument("--case", default=argparse.SUPPRESS, help="期次标识")
+    common.add_argument("--source", default=argparse.SUPPRESS, help="数据源，默认 fixture")
+    common.add_argument("--week-start", default=argparse.SUPPRESS)
+    common.add_argument("--week-end", default=argparse.SUPPRESS)
+    common.add_argument("--week-prev", default=argparse.SUPPRESS)
+    common.add_argument("--cutoff", default=argparse.SUPPRESS,
+                        help="信息截止时点，晚于此的公告不得使用")
 
+    ap = argparse.ArgumentParser(
+        prog="reits-weekly", description="公募REITs周报自动化", parents=[common]
+    )
     sub = ap.add_subparsers(dest="cmd", required=True)
 
-    p_run = sub.add_parser("run", help="执行一期")
+    p_run = sub.add_parser("run", help="执行一期", parents=[common])
     p_run.add_argument("--force", action="store_true", help="忽略检查点，全部重跑")
 
-    sub.add_parser("resume", help="从中断处继续（与 run 等价，语义更明确）")
-    sub.add_parser("status", help="查看状态")
+    sub.add_parser("resume", help="从中断处继续（与 run 等价，语义更明确）",
+                   parents=[common])
+    sub.add_parser("status", help="查看状态", parents=[common])
 
-    p_appr = sub.add_parser("approve", help="记录人工审批")
+    p_appr = sub.add_parser("approve", help="记录人工审批", parents=[common])
     p_appr.add_argument("--by", required=True, help="审批人")
     p_appr.add_argument("--comment", default="", help="审批意见")
 
-    p_ver = sub.add_parser("verify", help="只跑门禁，不出稿")
+    p_ver = sub.add_parser("verify", help="只跑门禁，不出稿", parents=[common])
     p_ver.add_argument("--json", action="store_true", help="输出 JSON")
 
+    return ap
+
+
+def main(argv: list[str] | None = None) -> int:
+    ap = build_parser()
     args = ap.parse_args(argv)
+    # 两个层级都没提供的参数补成 None，让 _cfg 去读 config/settings.yaml
+    for key in ("root", "case", "source", "week_start", "week_end",
+                "week_prev", "cutoff"):
+        if not hasattr(args, key):
+            setattr(args, key, None)
     cfg = _cfg(args)
 
     if args.cmd in ("run", "resume"):
@@ -95,6 +116,9 @@ def main(argv: list[str] | None = None) -> int:
             print("尚无门禁结果，请先运行 run", file=sys.stderr)
             return 2
         data = json.loads(gate_file.read_text(encoding="utf-8"))
+        if getattr(args, "json", False):
+            print(json.dumps(data, ensure_ascii=False, indent=2))
+            return 0 if all(r["ok"] for r in data) else 1
         for r in data:
             mark = "PASS" if r["ok"] else "FAIL"
             print(f"{mark}  {r['id']}  {r['detail']}")
