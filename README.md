@@ -5,7 +5,7 @@
 
 把"每周出一份公募 REITs 周报"从纯手工流程改造成**可长跑、可校验、可恢复、可迭代**的 agent 工作流。
 
-**仓库地址**：`git@github.com:zhb52/reits-weekly.git`（完整开发历史同时包含在本目录的 `.git/` 中，无需访问远程即可审阅）
+**仓库地址**：https://github.com/zhb52/REITs_Weekly（完整开发历史同时包含在本目录的 `.git/` 中，无需访问远程即可审阅）
 
 ---
 
