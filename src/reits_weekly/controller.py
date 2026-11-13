@@ -94,7 +94,12 @@ def run(cfg: RunConfig, state: CaseState | None = None, force: bool = False) -> 
         adapter = pipeline.get_adapter(cfg.source, cfg.fixture(), cfg.case_id)
         result = pipeline.prepare(adapter, week, boards, cfg.case_id)
 
-    if state.status in (Status.FAILED.value, Status.BLOCKED.value):
+    # 只有 FAILED 才必须停机等改代码。
+    # BLOCKED 表示"等外部条件"，但外部条件随时可能已被满足（补了数据、改了草稿、
+    # 签了字），因此必须继续往下走、重新评估；若条件仍未满足，会在原处再次 BLOCKED。
+    # 反过来，如果这里对 BLOCKED 也提前返回，resume 就变成空操作——
+    # 用户补完东西再跑会发现毫无反应，这是最伤信任的一类 bug。
+    if state.status == Status.FAILED.value:
         state.save(case_dir)
         return state
 
