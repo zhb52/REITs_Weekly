@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="880" viewBox="0 0 900 880" font-family="Microsoft YaHei, SimSun, sans-serif">
+  <title>公募 REITs 周报自动化工作流</title>
+  <desc>从数据取得到 docx 出稿的六阶段流程，标注确定性代码、agent、门禁、人工审批与状态机的位置</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <rect width="900" height="880" fill="#FFFFFF"/>
+
+  <text x="40" y="36" font-size="17" font-weight="600" fill="#1F3864">公募 REITs 周报自动化工作流</text>
+  <text x="40" y="56" font-size="12" fill="#5F5E5A">确定性代码算数字 · agent 写分析 · 门禁拦错 · 人工签字 · 状态机保证可续跑</text>
+
+  <g font-size="11">
+    <rect x="40" y="70" width="300" height="52" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+    <text x="56" y="92" font-size="13" fill="#0C447C">输入源</text>
+    <text x="56" y="110" fill="#185FA5">终端导出 · 交易所公示 · 中证指数 · 中债</text>
+
+    <rect x="40" y="150" width="300" height="52" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+    <text x="56" y="172" font-size="13" fill="#0C447C">数据适配器</text>
+    <text x="56" y="190" fill="#185FA5">取数并附溯源：source_id + raw_hash + 数据时点</text>
+
+    <rect x="40" y="230" width="300" height="52" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+    <text x="56" y="252" font-size="13" fill="#0C447C">归一化</text>
+    <text x="56" y="270" fill="#185FA5">板块映射（唯一事实源）· 单位归一 · 样本分类</text>
+
+    <rect x="40" y="310" width="300" height="52" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+    <text x="56" y="332" font-size="13" fill="#0C447C">计算器（纯函数）</text>
+    <text x="56" y="350" fill="#185FA5">收益 · 广度 · 估值 · 流动性，全部确定性代码</text>
+
+    <rect x="40" y="390" width="300" height="52" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+    <text x="56" y="412" font-size="13" fill="#0C447C">事实库 facts.json</text>
+    <text x="56" y="430" fill="#185FA5">每个指标一个 fact_id 与固定 display 字符串</text>
+
+    <rect x="40" y="480" width="140" height="52" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+    <text x="56" y="502" font-size="13" fill="#0C447C">图表</text>
+    <text x="56" y="520" fill="#185FA5">4 张 PNG</text>
+
+    <rect x="200" y="480" width="140" height="52" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+    <text x="216" y="502" font-size="13" fill="#26215C">起草者</text>
+    <text x="216" y="520" fill="#534AB7">13 节，只用占位符</text>
+
+    <rect x="40" y="570" width="300" height="52" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+    <text x="56" y="592" font-size="13" fill="#04342C">硬门禁 7 条</text>
+    <text x="56" y="610" fill="#0F6E56">数字回溯 · 勾稽 · 量级 · 板块一致 · 时效 · 结构 · 凭证</text>
+
+    <rect x="40" y="660" width="300" height="52" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+    <text x="56" y="682" font-size="13" fill="#412402">人工审批</text>
+    <text x="56" y="700" fill="#854F0B">签字绑定草稿 sha256，批完再改即失效</text>
+
+    <rect x="40" y="750" width="300" height="52" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+    <text x="56" y="772" font-size="13" fill="#04342C">出稿 docx</text>
+    <text x="56" y="790" fill="#0F6E56">5 表 · 4 图 · 页脚域 · 版式对齐样张</text>
+  </g>
+
+  <g stroke="#5F5E5A" stroke-width="1.2" fill="none" marker-end="url(#arrow)">
+    <path d="M190 122 L190 146"/>
+    <path d="M190 202 L190 226"/>
+    <path d="M190 282 L190 306"/>
+    <path d="M190 362 L190 386"/>
+    <path d="M190 442 L190 466 L110 466 L110 476"/>
+    <path d="M190 466 L190 476"/>
+    <path d="M110 532 L110 556 L190 556 L190 566"/>
+    <path d="M270 532 L270 556 L190 556"/>
+    <path d="M190 622 L190 656"/>
+    <path d="M190 712 L190 746"/>
+  </g>
+
+  <g stroke="#A32D2D" stroke-width="1.1" fill="none" stroke-dasharray="4 3" marker-end="url(#arrow)">
+    <path d="M340 600 L400 600 L400 506 L346 506"/>
+  </g>
+  <text x="404" y="560" font-size="10" fill="#A32D2D">门禁不通过</text>
+  <text x="404" y="574" font-size="10" fill="#A32D2D">→ 修订，≤2 轮</text>
+
+  <rect x="460" y="390" width="400" height="412" rx="12" fill="#F1EFE8" stroke="#888780" stroke-width="0.5"/>
+  <text x="478" y="414" font-size="13" font-weight="600" fill="#2C2C2A">控制器（不含 LLM）</text>
+  <text x="478" y="432" font-size="10" fill="#5F5E5A">只有它能写 state.json；只认哈希与门禁结果</text>
+
+  <g font-size="11" fill="#444441">
+    <text x="478" y="462" font-weight="600">持久状态</text>
+    <text x="478" y="480">身份：case_id · pipeline_version · input_hash</text>
+    <text x="478" y="498">进度：stage · status · 各阶段尝试次数</text>
+    <text x="478" y="516">证据：产物 path / sha256 / bytes · 门禁 · 审批</text>
+
+    <text x="478" y="548" font-weight="600">检查点与恢复</text>
+    <text x="478" y="566">产物存在且哈希一致且阶段匹配 → SKIP</text>
+    <text x="478" y="584">否则 → REDO 该阶段及其下游</text>
+
+    <text x="478" y="616" font-weight="600">重试与上限</text>
+    <text x="478" y="634">网络：5s / 20s / 60s，上限 3 次</text>
+    <text x="478" y="652">schema 漂移：不重试，转 BLOCKED</text>
+    <text x="478" y="670">门禁：≤2 轮；再失败转 ESCALATED</text>
+    <text x="478" y="688">预算：3600s · $3 · 300 tool calls</text>
+
+    <text x="478" y="720" font-weight="600">三态终止（语义不同，处理不同）</text>
+    <text x="478" y="738">BLOCKED　等外部条件（补数据 / 授权）</text>
+    <text x="478" y="756">FAILED　　代码缺陷，需改代码</text>
+    <text x="478" y="774">ESCALATED 额度用尽，需人决策</text>
+    <text x="478" y="792" font-size="10" fill="#A32D2D">注：耗尽配额永远不等于通过</text>
+  </g>
+
+  <g stroke="#888780" stroke-width="0.8" fill="none" stroke-dasharray="3 3">
+    <path d="M340 416 L460 416"/>
+    <path d="M340 686 L460 686"/>
+  </g>
+
+  <g font-size="10" fill="#5F5E5A">
+    <text x="352" y="262">未登记板块名 → 报错，不静默兜底</text>
+    <text x="352" y="342">数字只在这里产生</text>
+    <text x="352" y="418">正文引用 display，不写裸数字</text>
+    <text x="352" y="606">G-NUM-01 … G-SRC-01</text>
+    <text x="352" y="696">停在审批节点，不自动出稿</text>
+  </g>
+</svg>
