@@ -159,7 +159,8 @@ def build_facts(
                        source=src, section_hint=["0.1", "1.4"])
 
         bt = _liquidity.board_turnover(tv, n_days=n_days)
-        for board, row in bt.iterrows():
+        for _, row in bt.iterrows():
+            board = row["board"]
             bundle.add("turnover.board", float(row["turnover"]), unit="亿元",
                        formula="sum(turnover_week) within board",
                        params={"board": board}, source=src, section_hint=["1.4"])

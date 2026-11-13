@@ -1,0 +1,2773 @@
+{
+  "case_id": "demo-2026-W45",
+  "input_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171",
+  "count": 120,
+  "facts": [
+    {
+      "id": "F-0ddf7d25",
+      "metric": "board.eq_return",
+      "value": 1.6946976784665215,
+      "unit": "%",
+      "decimals": 2,
+      "display": "+1.69%",
+      "formula": "mean(ret_total) within board",
+      "params": {
+        "board": "数据中心"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "0.1",
+        "1.2",
+        "1.3"
+      ]
+    },
+    {
+      "id": "F-48aed67d",
+      "metric": "board.eq_return",
+      "value": 0.8018925219282924,
+      "unit": "%",
+      "decimals": 2,
+      "display": "+0.80%",
+      "formula": "mean(ret_total) within board",
+      "params": {
+        "board": "水利设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "0.1",
+        "1.2",
+        "1.3"
+      ]
+    },
+    {
+      "id": "F-d8a0f9da",
+      "metric": "board.eq_return",
+      "value": 0.6265529691483613,
+      "unit": "%",
+      "decimals": 2,
+      "display": "+0.63%",
+      "formula": "mean(ret_total) within board",
+      "params": {
+        "board": "保障性租赁住房"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "0.1",
+        "1.2",
+        "1.3"
+      ]
+    },
+    {
+      "id": "F-b4f01b33",
+      "metric": "board.eq_return",
+      "value": 0.20123947102041292,
+      "unit": "%",
+      "decimals": 2,
+      "display": "+0.20%",
+      "formula": "mean(ret_total) within board",
+      "params": {
+        "board": "消费基础设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "0.1",
+        "1.2",
+        "1.3"
+      ]
+    },
+    {
+      "id": "F-43dc3e13",
+      "metric": "board.eq_return",
+      "value": -0.2840416115340675,
+      "unit": "%",
+      "decimals": 2,
+      "display": "-0.28%",
+      "formula": "mean(ret_total) within board",
+      "params": {
+        "board": "交通基础设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "0.1",
+        "1.2",
+        "1.3"
+      ]
+    },
+    {
+      "id": "F-1e0f1c18",
+      "metric": "board.eq_return",
+      "value": -0.3163479214119484,
+      "unit": "%",
+      "decimals": 2,
+      "display": "-0.32%",
+      "formula": "mean(ret_total) within board",
+      "params": {
+        "board": "能源基础设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "0.1",
+        "1.2",
+        "1.3"
+      ]
+    },
+    {
+      "id": "F-4cb798aa",
+      "metric": "board.eq_return",
+      "value": -0.33471415037525887,
+      "unit": "%",
+      "decimals": 2,
+      "display": "-0.33%",
+      "formula": "mean(ret_total) within board",
+      "params": {
+        "board": "生态环保"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "0.1",
+        "1.2",
+        "1.3"
+      ]
+    },
+    {
+      "id": "F-87e2621d",
+      "metric": "board.eq_return",
+      "value": -0.7789085262653597,
+      "unit": "%",
+      "decimals": 2,
+      "display": "-0.78%",
+      "formula": "mean(ret_total) within board",
+      "params": {
+        "board": "仓储物流"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "0.1",
+        "1.2",
+        "1.3"
+      ]
+    },
+    {
+      "id": "F-c143f6f7",
+      "metric": "board.eq_return",
+      "value": -2.33057510981811,
+      "unit": "%",
+      "decimals": 2,
+      "display": "-2.33%",
+      "formula": "mean(ret_total) within board",
+      "params": {
+        "board": "产业园区"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "0.1",
+        "1.2",
+        "1.3"
+      ]
+    },
+    {
+      "id": "F-aa76f739",
+      "metric": "board.eq_return",
+      "value": -3.360725153783847,
+      "unit": "%",
+      "decimals": 2,
+      "display": "-3.36%",
+      "formula": "mean(ret_total) within board",
+      "params": {
+        "board": "商业不动产"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "0.1",
+        "1.2",
+        "1.3"
+      ]
+    },
+    {
+      "id": "F-c67fc70b",
+      "metric": "board.n",
+      "value": 2,
+      "unit": "只",
+      "decimals": 2,
+      "display": "2",
+      "formula": "count within board",
+      "params": {
+        "board": "数据中心"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.2"
+      ]
+    },
+    {
+      "id": "F-2436ed4d",
+      "metric": "board.n",
+      "value": 2,
+      "unit": "只",
+      "decimals": 2,
+      "display": "2",
+      "formula": "count within board",
+      "params": {
+        "board": "水利设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.2"
+      ]
+    },
+    {
+      "id": "F-3ee76cba",
+      "metric": "board.n",
+      "value": 11,
+      "unit": "只",
+      "decimals": 2,
+      "display": "11",
+      "formula": "count within board",
+      "params": {
+        "board": "保障性租赁住房"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.2"
+      ]
+    },
+    {
+      "id": "F-05f0d942",
+      "metric": "board.n",
+      "value": 12,
+      "unit": "只",
+      "decimals": 2,
+      "display": "12",
+      "formula": "count within board",
+      "params": {
+        "board": "消费基础设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.2"
+      ]
+    },
+    {
+      "id": "F-32510825",
+      "metric": "board.n",
+      "value": 15,
+      "unit": "只",
+      "decimals": 2,
+      "display": "15",
+      "formula": "count within board",
+      "params": {
+        "board": "交通基础设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.2"
+      ]
+    },
+    {
+      "id": "F-70726827",
+      "metric": "board.n",
+      "value": 12,
+      "unit": "只",
+      "decimals": 2,
+      "display": "12",
+      "formula": "count within board",
+      "params": {
+        "board": "能源基础设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.2"
+      ]
+    },
+    {
+      "id": "F-59da4133",
+      "metric": "board.n",
+      "value": 2,
+      "unit": "只",
+      "decimals": 2,
+      "display": "2",
+      "formula": "count within board",
+      "params": {
+        "board": "生态环保"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.2"
+      ]
+    },
+    {
+      "id": "F-ce1e7dbe",
+      "metric": "board.n",
+      "value": 12,
+      "unit": "只",
+      "decimals": 2,
+      "display": "12",
+      "formula": "count within board",
+      "params": {
+        "board": "仓储物流"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.2"
+      ]
+    },
+    {
+      "id": "F-c8eb4f07",
+      "metric": "board.n",
+      "value": 20,
+      "unit": "只",
+      "decimals": 2,
+      "display": "20",
+      "formula": "count within board",
+      "params": {
+        "board": "产业园区"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.2"
+      ]
+    },
+    {
+      "id": "F-d76bbf7c",
+      "metric": "board.n",
+      "value": 6,
+      "unit": "只",
+      "decimals": 2,
+      "display": "6",
+      "formula": "count within board",
+      "params": {
+        "board": "商业不动产"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.2"
+      ]
+    },
+    {
+      "id": "F-92d4e25e",
+      "metric": "board.w_return",
+      "value": 1.694769018174451,
+      "unit": "%",
+      "decimals": 2,
+      "display": "+1.69%",
+      "formula": "sum(ret*w)/sum(w) within board",
+      "params": {
+        "board": "数据中心"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.2"
+      ]
+    },
+    {
+      "id": "F-d9c6703e",
+      "metric": "board.w_return",
+      "value": 0.5714461168748414,
+      "unit": "%",
+      "decimals": 2,
+      "display": "+0.57%",
+      "formula": "sum(ret*w)/sum(w) within board",
+      "params": {
+        "board": "水利设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.2"
+      ]
+    },
+    {
+      "id": "F-2638232f",
+      "metric": "board.w_return",
+      "value": 0.5672588743419079,
+      "unit": "%",
+      "decimals": 2,
+      "display": "+0.57%",
+      "formula": "sum(ret*w)/sum(w) within board",
+      "params": {
+        "board": "保障性租赁住房"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.2"
+      ]
+    },
+    {
+      "id": "F-ed266700",
+      "metric": "board.w_return",
+      "value": 0.4899777253598969,
+      "unit": "%",
+      "decimals": 2,
+      "display": "+0.49%",
+      "formula": "sum(ret*w)/sum(w) within board",
+      "params": {
+        "board": "消费基础设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.2"
+      ]
+    },
+    {
+      "id": "F-e09adc4f",
+      "metric": "board.w_return",
+      "value": -0.22963778192775441,
+      "unit": "%",
+      "decimals": 2,
+      "display": "-0.23%",
+      "formula": "sum(ret*w)/sum(w) within board",
+      "params": {
+        "board": "交通基础设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.2"
+      ]
+    },
+    {
+      "id": "F-4041e9fa",
+      "metric": "board.w_return",
+      "value": -0.16857912476327563,
+      "unit": "%",
+      "decimals": 2,
+      "display": "-0.17%",
+      "formula": "sum(ret*w)/sum(w) within board",
+      "params": {
+        "board": "能源基础设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.2"
+      ]
+    },
+    {
+      "id": "F-f62c4684",
+      "metric": "board.w_return",
+      "value": -0.1967610761523605,
+      "unit": "%",
+      "decimals": 2,
+      "display": "-0.20%",
+      "formula": "sum(ret*w)/sum(w) within board",
+      "params": {
+        "board": "生态环保"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.2"
+      ]
+    },
+    {
+      "id": "F-21b49a57",
+      "metric": "board.w_return",
+      "value": -0.8690833640086597,
+      "unit": "%",
+      "decimals": 2,
+      "display": "-0.87%",
+      "formula": "sum(ret*w)/sum(w) within board",
+      "params": {
+        "board": "仓储物流"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.2"
+      ]
+    },
+    {
+      "id": "F-1030cdd2",
+      "metric": "board.w_return",
+      "value": -2.413747507526668,
+      "unit": "%",
+      "decimals": 2,
+      "display": "-2.41%",
+      "formula": "sum(ret*w)/sum(w) within board",
+      "params": {
+        "board": "产业园区"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.2"
+      ]
+    },
+    {
+      "id": "F-62edcb30",
+      "metric": "board.w_return",
+      "value": -1.9304646065432411,
+      "unit": "%",
+      "decimals": 2,
+      "display": "-1.93%",
+      "formula": "sum(ret*w)/sum(w) within board",
+      "params": {
+        "board": "商业不动产"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.2"
+      ]
+    },
+    {
+      "id": "F-a9a84c8a",
+      "metric": "breadth.down",
+      "value": 50,
+      "unit": "只",
+      "decimals": 2,
+      "display": "50",
+      "formula": "ret_total < -1e-9",
+      "params": {},
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "0.1",
+        "1.3"
+      ]
+    },
+    {
+      "id": "F-3f45081a",
+      "metric": "breadth.flat",
+      "value": 3,
+      "unit": "只",
+      "decimals": 2,
+      "display": "3",
+      "formula": "n - up - down",
+      "params": {},
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "0.1",
+        "1.3"
+      ]
+    },
+    {
+      "id": "F-ad7cf165",
+      "metric": "breadth.n",
+      "value": 94,
+      "unit": "只",
+      "decimals": 2,
+      "display": "94",
+      "formula": "count(non-null ret_total)",
+      "params": {},
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "0.1",
+        "1.3"
+      ]
+    },
+    {
+      "id": "F-a4549f64",
+      "metric": "breadth.up",
+      "value": 41,
+      "unit": "只",
+      "decimals": 2,
+      "display": "41",
+      "formula": "ret_total > 1e-9",
+      "params": {},
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "0.1",
+        "1.3"
+      ]
+    },
+    {
+      "id": "F-8511c777",
+      "metric": "market.eq_return",
+      "value": -0.7505196409711484,
+      "unit": "%",
+      "decimals": 2,
+      "display": "-0.75%",
+      "formula": "mean(ret_total)",
+      "params": {},
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "0.1",
+        "1.3"
+      ]
+    },
+    {
+      "id": "F-ca8323fc",
+      "metric": "market.median_return",
+      "value": -0.07925539256475794,
+      "unit": "%",
+      "decimals": 2,
+      "display": "-0.08%",
+      "formula": "median(ret_total)",
+      "params": {},
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "0.1",
+        "1.3"
+      ]
+    },
+    {
+      "id": "F-ed87cf19",
+      "metric": "pnav.board.median",
+      "value": 0.713810222503579,
+      "unit": "ratio",
+      "decimals": 3,
+      "display": "0.714",
+      "formula": "median(pnav) within board",
+      "params": {
+        "board": "产业园区"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-5ebaf170",
+      "metric": "pnav.board.median",
+      "value": 0.9101388991018959,
+      "unit": "ratio",
+      "decimals": 3,
+      "display": "0.910",
+      "formula": "median(pnav) within board",
+      "params": {
+        "board": "商业不动产"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-28a8cb70",
+      "metric": "pnav.board.median",
+      "value": 1.00142787746751,
+      "unit": "ratio",
+      "decimals": 3,
+      "display": "1.001",
+      "formula": "median(pnav) within board",
+      "params": {
+        "board": "交通基础设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-427f3065",
+      "metric": "pnav.board.median",
+      "value": 1.03559154057116,
+      "unit": "ratio",
+      "decimals": 3,
+      "display": "1.036",
+      "formula": "median(pnav) within board",
+      "params": {
+        "board": "仓储物流"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-498ea890",
+      "metric": "pnav.board.median",
+      "value": 1.101049399959515,
+      "unit": "ratio",
+      "decimals": 3,
+      "display": "1.101",
+      "formula": "median(pnav) within board",
+      "params": {
+        "board": "能源基础设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-fdf66be7",
+      "metric": "pnav.board.median",
+      "value": 1.25637769405037,
+      "unit": "ratio",
+      "decimals": 3,
+      "display": "1.256",
+      "formula": "median(pnav) within board",
+      "params": {
+        "board": "生态环保"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-11c1dff9",
+      "metric": "pnav.board.median",
+      "value": 1.2835690484276299,
+      "unit": "ratio",
+      "decimals": 3,
+      "display": "1.284",
+      "formula": "median(pnav) within board",
+      "params": {
+        "board": "水利设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-6a5782d8",
+      "metric": "pnav.board.median",
+      "value": 1.3031461780184,
+      "unit": "ratio",
+      "decimals": 3,
+      "display": "1.303",
+      "formula": "median(pnav) within board",
+      "params": {
+        "board": "保障性租赁住房"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-f2c12862",
+      "metric": "pnav.board.median",
+      "value": 1.3245616090985899,
+      "unit": "ratio",
+      "decimals": 3,
+      "display": "1.325",
+      "formula": "median(pnav) within board",
+      "params": {
+        "board": "数据中心"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-0972626a",
+      "metric": "pnav.board.median",
+      "value": 1.340582432617445,
+      "unit": "ratio",
+      "decimals": 3,
+      "display": "1.341",
+      "formula": "median(pnav) within board",
+      "params": {
+        "board": "消费基础设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-7c403ed9",
+      "metric": "pnav.board.median_discount",
+      "value": -28.618977749642106,
+      "unit": "%",
+      "decimals": 1,
+      "display": "-28.6%",
+      "formula": "(median(pnav within board)-1)*100",
+      "params": {
+        "board": "产业园区"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-c54c81c6",
+      "metric": "pnav.board.median_discount",
+      "value": -8.986110089810406,
+      "unit": "%",
+      "decimals": 1,
+      "display": "-9.0%",
+      "formula": "(median(pnav within board)-1)*100",
+      "params": {
+        "board": "商业不动产"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-313e2db4",
+      "metric": "pnav.board.median_discount",
+      "value": 0.14278774675100525,
+      "unit": "%",
+      "decimals": 1,
+      "display": "+0.1%",
+      "formula": "(median(pnav within board)-1)*100",
+      "params": {
+        "board": "交通基础设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-f72a6761",
+      "metric": "pnav.board.median_discount",
+      "value": 3.5591540571159985,
+      "unit": "%",
+      "decimals": 1,
+      "display": "+3.6%",
+      "formula": "(median(pnav within board)-1)*100",
+      "params": {
+        "board": "仓储物流"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-07e94f71",
+      "metric": "pnav.board.median_discount",
+      "value": 10.1049399959515,
+      "unit": "%",
+      "decimals": 1,
+      "display": "+10.1%",
+      "formula": "(median(pnav within board)-1)*100",
+      "params": {
+        "board": "能源基础设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-4b77c1c5",
+      "metric": "pnav.board.median_discount",
+      "value": 25.63776940503699,
+      "unit": "%",
+      "decimals": 1,
+      "display": "+25.6%",
+      "formula": "(median(pnav within board)-1)*100",
+      "params": {
+        "board": "生态环保"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-35a5da20",
+      "metric": "pnav.board.median_discount",
+      "value": 28.356904842762987,
+      "unit": "%",
+      "decimals": 1,
+      "display": "+28.4%",
+      "formula": "(median(pnav within board)-1)*100",
+      "params": {
+        "board": "水利设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-69633adb",
+      "metric": "pnav.board.median_discount",
+      "value": 30.314617801839994,
+      "unit": "%",
+      "decimals": 1,
+      "display": "+30.3%",
+      "formula": "(median(pnav within board)-1)*100",
+      "params": {
+        "board": "保障性租赁住房"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-4e19990f",
+      "metric": "pnav.board.median_discount",
+      "value": 32.45616090985899,
+      "unit": "%",
+      "decimals": 1,
+      "display": "+32.5%",
+      "formula": "(median(pnav within board)-1)*100",
+      "params": {
+        "board": "数据中心"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-ca388147",
+      "metric": "pnav.board.median_discount",
+      "value": 34.058243261744494,
+      "unit": "%",
+      "decimals": 1,
+      "display": "+34.1%",
+      "formula": "(median(pnav within board)-1)*100",
+      "params": {
+        "board": "消费基础设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-aff09992",
+      "metric": "pnav.board.n",
+      "value": 20,
+      "unit": "只",
+      "decimals": 2,
+      "display": "20",
+      "formula": "count within board",
+      "params": {
+        "board": "产业园区"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-de8de1e1",
+      "metric": "pnav.board.n",
+      "value": 6,
+      "unit": "只",
+      "decimals": 2,
+      "display": "6",
+      "formula": "count within board",
+      "params": {
+        "board": "商业不动产"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-12a2c7d6",
+      "metric": "pnav.board.n",
+      "value": 15,
+      "unit": "只",
+      "decimals": 2,
+      "display": "15",
+      "formula": "count within board",
+      "params": {
+        "board": "交通基础设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-b35a6f02",
+      "metric": "pnav.board.n",
+      "value": 12,
+      "unit": "只",
+      "decimals": 2,
+      "display": "12",
+      "formula": "count within board",
+      "params": {
+        "board": "仓储物流"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-386fc50a",
+      "metric": "pnav.board.n",
+      "value": 12,
+      "unit": "只",
+      "decimals": 2,
+      "display": "12",
+      "formula": "count within board",
+      "params": {
+        "board": "能源基础设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-1d5e598e",
+      "metric": "pnav.board.n",
+      "value": 2,
+      "unit": "只",
+      "decimals": 2,
+      "display": "2",
+      "formula": "count within board",
+      "params": {
+        "board": "生态环保"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-f9eee736",
+      "metric": "pnav.board.n",
+      "value": 2,
+      "unit": "只",
+      "decimals": 2,
+      "display": "2",
+      "formula": "count within board",
+      "params": {
+        "board": "水利设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-0aa8531a",
+      "metric": "pnav.board.n",
+      "value": 11,
+      "unit": "只",
+      "decimals": 2,
+      "display": "11",
+      "formula": "count within board",
+      "params": {
+        "board": "保障性租赁住房"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-ffa2fbb6",
+      "metric": "pnav.board.n",
+      "value": 2,
+      "unit": "只",
+      "decimals": 2,
+      "display": "2",
+      "formula": "count within board",
+      "params": {
+        "board": "数据中心"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-a38ad56c",
+      "metric": "pnav.board.n",
+      "value": 12,
+      "unit": "只",
+      "decimals": 2,
+      "display": "12",
+      "formula": "count within board",
+      "params": {
+        "board": "消费基础设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-1b792eb0",
+      "metric": "pnav.board.n_discount",
+      "value": 17,
+      "unit": "只",
+      "decimals": 2,
+      "display": "17",
+      "formula": "pnav < 1 within board",
+      "params": {
+        "board": "产业园区"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-f54261d8",
+      "metric": "pnav.board.n_discount",
+      "value": 5,
+      "unit": "只",
+      "decimals": 2,
+      "display": "5",
+      "formula": "pnav < 1 within board",
+      "params": {
+        "board": "商业不动产"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-d2d21ac5",
+      "metric": "pnav.board.n_discount",
+      "value": 7,
+      "unit": "只",
+      "decimals": 2,
+      "display": "7",
+      "formula": "pnav < 1 within board",
+      "params": {
+        "board": "交通基础设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-947cdb6a",
+      "metric": "pnav.board.n_discount",
+      "value": 5,
+      "unit": "只",
+      "decimals": 2,
+      "display": "5",
+      "formula": "pnav < 1 within board",
+      "params": {
+        "board": "仓储物流"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-ba51565e",
+      "metric": "pnav.board.n_discount",
+      "value": 2,
+      "unit": "只",
+      "decimals": 2,
+      "display": "2",
+      "formula": "pnav < 1 within board",
+      "params": {
+        "board": "能源基础设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-70e5f340",
+      "metric": "pnav.board.n_discount",
+      "value": 0,
+      "unit": "只",
+      "decimals": 2,
+      "display": "0",
+      "formula": "pnav < 1 within board",
+      "params": {
+        "board": "生态环保"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-785a6000",
+      "metric": "pnav.board.n_discount",
+      "value": 0,
+      "unit": "只",
+      "decimals": 2,
+      "display": "0",
+      "formula": "pnav < 1 within board",
+      "params": {
+        "board": "水利设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-8acff669",
+      "metric": "pnav.board.n_discount",
+      "value": 0,
+      "unit": "只",
+      "decimals": 2,
+      "display": "0",
+      "formula": "pnav < 1 within board",
+      "params": {
+        "board": "保障性租赁住房"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-7e560eb0",
+      "metric": "pnav.board.n_discount",
+      "value": 0,
+      "unit": "只",
+      "decimals": 2,
+      "display": "0",
+      "formula": "pnav < 1 within board",
+      "params": {
+        "board": "数据中心"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-635ceef4",
+      "metric": "pnav.board.n_discount",
+      "value": 2,
+      "unit": "只",
+      "decimals": 2,
+      "display": "2",
+      "formula": "pnav < 1 within board",
+      "params": {
+        "board": "消费基础设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-0a18ab76",
+      "metric": "pnav.board.n_premium",
+      "value": 3,
+      "unit": "只",
+      "decimals": 2,
+      "display": "3",
+      "formula": "pnav >= 1 within board",
+      "params": {
+        "board": "产业园区"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-7e32bcb7",
+      "metric": "pnav.board.n_premium",
+      "value": 1,
+      "unit": "只",
+      "decimals": 2,
+      "display": "1",
+      "formula": "pnav >= 1 within board",
+      "params": {
+        "board": "商业不动产"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-df609111",
+      "metric": "pnav.board.n_premium",
+      "value": 8,
+      "unit": "只",
+      "decimals": 2,
+      "display": "8",
+      "formula": "pnav >= 1 within board",
+      "params": {
+        "board": "交通基础设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-91b7193d",
+      "metric": "pnav.board.n_premium",
+      "value": 7,
+      "unit": "只",
+      "decimals": 2,
+      "display": "7",
+      "formula": "pnav >= 1 within board",
+      "params": {
+        "board": "仓储物流"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-a9797bb0",
+      "metric": "pnav.board.n_premium",
+      "value": 10,
+      "unit": "只",
+      "decimals": 2,
+      "display": "10",
+      "formula": "pnav >= 1 within board",
+      "params": {
+        "board": "能源基础设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-6022b4d5",
+      "metric": "pnav.board.n_premium",
+      "value": 2,
+      "unit": "只",
+      "decimals": 2,
+      "display": "2",
+      "formula": "pnav >= 1 within board",
+      "params": {
+        "board": "生态环保"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-ba99821b",
+      "metric": "pnav.board.n_premium",
+      "value": 2,
+      "unit": "只",
+      "decimals": 2,
+      "display": "2",
+      "formula": "pnav >= 1 within board",
+      "params": {
+        "board": "水利设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-890f0c7d",
+      "metric": "pnav.board.n_premium",
+      "value": 11,
+      "unit": "只",
+      "decimals": 2,
+      "display": "11",
+      "formula": "pnav >= 1 within board",
+      "params": {
+        "board": "保障性租赁住房"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-c93e0774",
+      "metric": "pnav.board.n_premium",
+      "value": 2,
+      "unit": "只",
+      "decimals": 2,
+      "display": "2",
+      "formula": "pnav >= 1 within board",
+      "params": {
+        "board": "数据中心"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-b0a654f1",
+      "metric": "pnav.board.n_premium",
+      "value": 10,
+      "unit": "只",
+      "decimals": 2,
+      "display": "10",
+      "formula": "pnav >= 1 within board",
+      "params": {
+        "board": "消费基础设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-f77020aa",
+      "metric": "pnav.max",
+      "value": 1.673602241358,
+      "unit": "ratio",
+      "decimals": 3,
+      "display": "1.674",
+      "formula": "max(pnav)",
+      "params": {},
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-94e6b2db",
+      "metric": "pnav.mean",
+      "value": 1.0582267237396548,
+      "unit": "ratio",
+      "decimals": 3,
+      "display": "1.058",
+      "formula": "mean(pnav)",
+      "params": {},
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-efcf2385",
+      "metric": "pnav.median",
+      "value": 1.05461721646678,
+      "unit": "ratio",
+      "decimals": 3,
+      "display": "1.055",
+      "formula": "median(pnav)",
+      "params": {},
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "0.2",
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-bd7f0f2f",
+      "metric": "pnav.median_discount",
+      "value": 5.461721646677997,
+      "unit": "%",
+      "decimals": 1,
+      "display": "+5.5%",
+      "formula": "(median(pnav)-1)*100",
+      "params": {},
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-e0170703",
+      "metric": "pnav.min",
+      "value": 0.422978980534335,
+      "unit": "ratio",
+      "decimals": 3,
+      "display": "0.423",
+      "formula": "min(pnav)",
+      "params": {},
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-059a464a",
+      "metric": "pnav.n_discount",
+      "value": 38,
+      "unit": "只",
+      "decimals": 2,
+      "display": "38",
+      "formula": "pnav < 1",
+      "params": {},
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "0.2",
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-ad5836f1",
+      "metric": "pnav.n_premium",
+      "value": 56,
+      "unit": "只",
+      "decimals": 2,
+      "display": "56",
+      "formula": "pnav >= 1",
+      "params": {},
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "0.2",
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-e0069401",
+      "metric": "pnav.q25",
+      "value": 0.8770200171104142,
+      "unit": "ratio",
+      "decimals": 3,
+      "display": "0.877",
+      "formula": "quantile(pnav,0.25)",
+      "params": {},
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-11a93f75",
+      "metric": "pnav.q75",
+      "value": 1.25610709076728,
+      "unit": "ratio",
+      "decimals": 3,
+      "display": "1.256",
+      "formula": "quantile(pnav,0.75)",
+      "params": {},
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-99c192fe",
+      "metric": "pnav.weighted",
+      "value": 1.091337552896877,
+      "unit": "ratio",
+      "decimals": 3,
+      "display": "1.091",
+      "formula": "sum(pnav*mktcap_total)/sum(mktcap_total)",
+      "params": {},
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "0.2",
+        "1.5"
+      ]
+    },
+    {
+      "id": "F-0b23b2d1",
+      "metric": "turnover.avg_daily",
+      "value": 4.385777053818001,
+      "unit": "亿元",
+      "decimals": 2,
+      "display": "4.39",
+      "formula": "sum(turnover_week)/n_days",
+      "params": {},
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "0.1",
+        "1.4"
+      ]
+    },
+    {
+      "id": "F-4da860c6",
+      "metric": "turnover.board",
+      "value": 3.73692244517,
+      "unit": "亿元",
+      "decimals": 2,
+      "display": "3.74",
+      "formula": "sum(turnover_week) within board",
+      "params": {
+        "board": "交通基础设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.4"
+      ]
+    },
+    {
+      "id": "F-ccbff895",
+      "metric": "turnover.board",
+      "value": 3.39215064681,
+      "unit": "亿元",
+      "decimals": 2,
+      "display": "3.39",
+      "formula": "sum(turnover_week) within board",
+      "params": {
+        "board": "能源基础设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.4"
+      ]
+    },
+    {
+      "id": "F-a82570ba",
+      "metric": "turnover.board",
+      "value": 2.99558977641,
+      "unit": "亿元",
+      "decimals": 2,
+      "display": "3.00",
+      "formula": "sum(turnover_week) within board",
+      "params": {
+        "board": "产业园区"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.4"
+      ]
+    },
+    {
+      "id": "F-034d5548",
+      "metric": "turnover.board",
+      "value": 2.93789914411,
+      "unit": "亿元",
+      "decimals": 2,
+      "display": "2.94",
+      "formula": "sum(turnover_week) within board",
+      "params": {
+        "board": "仓储物流"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.4"
+      ]
+    },
+    {
+      "id": "F-44e98ffc",
+      "metric": "turnover.board",
+      "value": 2.76081754807,
+      "unit": "亿元",
+      "decimals": 2,
+      "display": "2.76",
+      "formula": "sum(turnover_week) within board",
+      "params": {
+        "board": "保障性租赁住房"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.4"
+      ]
+    },
+    {
+      "id": "F-dfa4f462",
+      "metric": "turnover.board",
+      "value": 2.55910567889,
+      "unit": "亿元",
+      "decimals": 2,
+      "display": "2.56",
+      "formula": "sum(turnover_week) within board",
+      "params": {
+        "board": "消费基础设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.4"
+      ]
+    },
+    {
+      "id": "F-04cfc7fc",
+      "metric": "turnover.board",
+      "value": 1.4983823586,
+      "unit": "亿元",
+      "decimals": 2,
+      "display": "1.50",
+      "formula": "sum(turnover_week) within board",
+      "params": {
+        "board": "商业不动产"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.4"
+      ]
+    },
+    {
+      "id": "F-c1628652",
+      "metric": "turnover.board",
+      "value": 1.23513162313,
+      "unit": "亿元",
+      "decimals": 2,
+      "display": "1.24",
+      "formula": "sum(turnover_week) within board",
+      "params": {
+        "board": "数据中心"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.4"
+      ]
+    },
+    {
+      "id": "F-6a68cccf",
+      "metric": "turnover.board",
+      "value": 0.49710500616000003,
+      "unit": "亿元",
+      "decimals": 2,
+      "display": "0.50",
+      "formula": "sum(turnover_week) within board",
+      "params": {
+        "board": "水利设施"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.4"
+      ]
+    },
+    {
+      "id": "F-10fe697c",
+      "metric": "turnover.board",
+      "value": 0.31578104174,
+      "unit": "亿元",
+      "decimals": 2,
+      "display": "0.32",
+      "formula": "sum(turnover_week) within board",
+      "params": {
+        "board": "生态环保"
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.4"
+      ]
+    },
+    {
+      "id": "F-41aa3df4",
+      "metric": "turnover.board_rate",
+      "value": 0.22314087862164658,
+      "unit": "%",
+      "decimals": 2,
+      "display": "+0.22%",
+      "formula": "TR-01",
+      "params": {
+        "board": "交通基础设施",
+        "n_days": 5
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.4"
+      ]
+    },
+    {
+      "id": "F-26b0f626",
+      "metric": "turnover.board_rate",
+      "value": 0.3596948111956568,
+      "unit": "%",
+      "decimals": 2,
+      "display": "+0.36%",
+      "formula": "TR-01",
+      "params": {
+        "board": "能源基础设施",
+        "n_days": 5
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.4"
+      ]
+    },
+    {
+      "id": "F-2d788322",
+      "metric": "turnover.board_rate",
+      "value": 0.35273019935241817,
+      "unit": "%",
+      "decimals": 2,
+      "display": "+0.35%",
+      "formula": "TR-01",
+      "params": {
+        "board": "产业园区",
+        "n_days": 5
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.4"
+      ]
+    },
+    {
+      "id": "F-617c8eb7",
+      "metric": "turnover.board_rate",
+      "value": 0.38817467044785586,
+      "unit": "%",
+      "decimals": 2,
+      "display": "+0.39%",
+      "formula": "TR-01",
+      "params": {
+        "board": "仓储物流",
+        "n_days": 5
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.4"
+      ]
+    },
+    {
+      "id": "F-b7a86aff",
+      "metric": "turnover.board_rate",
+      "value": 0.41582374869900873,
+      "unit": "%",
+      "decimals": 2,
+      "display": "+0.42%",
+      "formula": "TR-01",
+      "params": {
+        "board": "保障性租赁住房",
+        "n_days": 5
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.4"
+      ]
+    },
+    {
+      "id": "F-77da807e",
+      "metric": "turnover.board_rate",
+      "value": 0.23857325975849197,
+      "unit": "%",
+      "decimals": 2,
+      "display": "+0.24%",
+      "formula": "TR-01",
+      "params": {
+        "board": "消费基础设施",
+        "n_days": 5
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.4"
+      ]
+    },
+    {
+      "id": "F-3693587b",
+      "metric": "turnover.board_rate",
+      "value": 0.41181769223914055,
+      "unit": "%",
+      "decimals": 2,
+      "display": "+0.41%",
+      "formula": "TR-01",
+      "params": {
+        "board": "商业不动产",
+        "n_days": 5
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.4"
+      ]
+    },
+    {
+      "id": "F-4b71bac3",
+      "metric": "turnover.board_rate",
+      "value": 0.5960810841758887,
+      "unit": "%",
+      "decimals": 2,
+      "display": "+0.60%",
+      "formula": "TR-01",
+      "params": {
+        "board": "数据中心",
+        "n_days": 5
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.4"
+      ]
+    },
+    {
+      "id": "F-7f0427a7",
+      "metric": "turnover.board_rate",
+      "value": 0.5765399237789298,
+      "unit": "%",
+      "decimals": 2,
+      "display": "+0.58%",
+      "formula": "TR-01",
+      "params": {
+        "board": "水利设施",
+        "n_days": 5
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.4"
+      ]
+    },
+    {
+      "id": "F-7f6f2c03",
+      "metric": "turnover.board_rate",
+      "value": 0.3239106441296997,
+      "unit": "%",
+      "decimals": 2,
+      "display": "+0.32%",
+      "formula": "TR-01",
+      "params": {
+        "board": "生态环保",
+        "n_days": 5
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "1.4"
+      ]
+    },
+    {
+      "id": "F-282be875",
+      "metric": "turnover.mom",
+      "value": -9.14221026982467,
+      "unit": "%",
+      "decimals": 1,
+      "display": "-9.1%",
+      "formula": "(cur-prev)/prev*100",
+      "params": {},
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "0.1",
+        "1.4"
+      ]
+    },
+    {
+      "id": "F-d56d68bb",
+      "metric": "turnover.rate",
+      "value": 0.3265539782247916,
+      "unit": "%",
+      "decimals": 3,
+      "display": "+0.327%",
+      "formula": "TR-01",
+      "params": {
+        "n_days": 5
+      },
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "0.1",
+        "1.4"
+      ]
+    },
+    {
+      "id": "F-1f363202",
+      "metric": "turnover.total",
+      "value": 21.928885269090003,
+      "unit": "亿元",
+      "decimals": 2,
+      "display": "21.93",
+      "formula": "sum(turnover_week)",
+      "params": {},
+      "source": {
+        "source_id": "fixture:demo-2026-W45",
+        "adapter": "FixtureAdapter",
+        "retrieved_at": "2026-11-14T02:51:18.211635",
+        "source_asof": "2026-11-06",
+        "license": "public-market-data",
+        "raw_hash": "d322b9cba21770d403b17fb886091f2fbc75f987d8c6efac348db67ec7e15171"
+      },
+      "section_hint": [
+        "0.1",
+        "1.4"
+      ]
+    }
+  ]
+}

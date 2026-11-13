@@ -66,6 +66,7 @@ def board_turnover(
     df: pd.DataFrame,
     board_col: str = "board",
     turnover_col: str = "turnover_week",
+    prev_col: str = "turnover_week_prev",
     weight_col: str = "weight_float",
     n_days: int = 5,
 ) -> pd.DataFrame:
@@ -73,26 +74,41 @@ def board_turnover(
 
     Returns
     -------
-    DataFrame，列：``board`` / ``turnover`` / ``turnover_rate`` / ``share_pct``。
+    DataFrame，列：``board`` / ``turnover`` / ``turnover_prev`` /
+        ``turnover_rate`` / ``turnover_rate_prev`` / ``share_pct``。
+
+    Note
+    ----
+    上周换手率用**本期流通市值**作分母重算，是与本周同口径的可比值，
+    不等于终端公布的"上周日均换手率"（那用的是上周市值）。报告 1.4 的
+    环比表述因此要写成"较上周同口径回落 X 个百分点"，不能直接照抄终端值。
     """
     work = df.copy()
-    for c in (turnover_col, weight_col):
-        work[c] = pd.to_numeric(work[c], errors="coerce").fillna(0.0)
+    for c in (turnover_col, prev_col, weight_col):
+        if c in work.columns:
+            work[c] = pd.to_numeric(work[c], errors="coerce").fillna(0.0)
 
     grouped = work.groupby(board_col, sort=False)
     out = pd.DataFrame(
         {
             "turnover": grouped[turnover_col].sum(),
-            "weight": grouped[weight_col].sum(),
+            "turnover_prev": grouped[prev_col].sum() if prev_col in work.columns else 0.0,
+            "weight": grouped[weight_col].sum() if weight_col in work.columns else 0.0,
         }
     )
     out["turnover_rate"] = out.apply(
         lambda r: r["turnover"] / r["weight"] / n_days * 100.0 if r["weight"] > 0 else float("nan"),
         axis=1,
     )
+    out["turnover_rate_prev"] = out.apply(
+        lambda r: r["turnover_prev"] / r["weight"] / n_days * 100.0 if r["weight"] > 0 else float("nan"),
+        axis=1,
+    )
     total = out["turnover"].sum()
     out["share_pct"] = out["turnover"] / total * 100.0 if total > 0 else float("nan")
-    return out.sort_values("turnover", ascending=False)
+    return out.reset_index().rename(columns={board_col: "board"}).sort_values(
+        "turnover", ascending=False
+    ).reset_index(drop=True)
 
 
 def concentration(df: pd.DataFrame, top_n: int = 4, col: str = "turnover_week") -> dict:
