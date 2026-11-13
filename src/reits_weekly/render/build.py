@@ -1,46 +1,74 @@
-"""报告装配 —— 决定"哪一节后面接哪张表、哪张图"。
+"""报告装配 —— 章节顺序与表图位置由 ``config/sections.yaml`` 决定。
 
-章节顺序与块的位置写在这里而不是散落在各处，是因为它同时是
-``verify/lint.py`` 检查结构完整性的依据（章节是否齐全、顺序是否对）。
+早期版本把章节骨架硬编码在本文件的 ``OUTLINE`` 里，改章节要改代码。
+现在改为配置驱动：增删章节、调整某张表放在哪一节，都只需要改 YAML。
+
+块（table / chart）通过 ``_BLOCKS`` 注册表按名字查找。配置里写了未注册的块名会
+直接报错，而不是静默跳过——静默跳过会让人以为表已经生成了。
 """
 
 from __future__ import annotations
 
 import re
+from dataclasses import dataclass
 from pathlib import Path
 
 import pandas as pd
-from docx import Document
+import yaml
 
 from ..compute import valuation
 from ..facts import FactsBundle
-from ..formatting import fmt_pct, fmt_ratio
 from ..pipeline import CaseResult
 from . import docx_writer as W
 from . import tables as T
 
-# 章节骨架：(级别, 标识, 标题)
-OUTLINE = [
-    ("chapter", "abs", "摘要：本周判断与配置关注"),
-    ("section", "0.1", "0.1 市场核心判断"),
-    ("section", "0.2", "0.2 基本面与定价判断"),
-    ("section", "0.3", "0.3 配置关注与观点变化"),
-    ("chapter", "ch1", "第一章 市场表现——整体收益、板块分化与交易变化"),
-    ("section", "1.1", "1.1 整体收益与跨资产表现"),
-    ("section", "1.2", "1.2 板块表现与市场全景"),
-    ("section", "1.3", "1.3 个券表现与异常识别"),
-    ("section", "1.4", "1.4 成交活跃度与流动性"),
-    ("section", "1.5", "1.5 折溢价变化"),
-    ("chapter", "ch2", "第二章 定价环境——利率变化与近期供需安排"),
-    ("section", "2.1", "2.1 利率与资金价格"),
-    ("section", "2.2", "2.2 首发与扩募供给安排"),
-    ("section", "2.3", "2.3 解禁与份额变化"),
-    ("section", "2.4", "2.4 已披露的持有人行为"),
-    ("section", "2.5", "2.5 外部条件的综合判断"),
-    ("chapter", "risk", "风险提示"),
-]
+_SNAPSHOT_LABELS = {
+    "932047": "中证REITs全收益指数",
+    "932006": "中证REITs（收盘）指数",
+    "H00300": "沪深300全收益指数",
+    "H00922": "中证红利全收益指数",
+    "CBA00201": "中债综合财富指数",
+}
 
-SECTION_IDS = [sid for lvl, sid, _ in OUTLINE if lvl == "section"] + ["risk"]
+REITS_INDEX_CODES = ["932047", "932006"]
+CROSS_ASSET_CODES = ["932047", "H00300", "H00922", "CBA00201"]
+
+
+# --------------------------------------------------------------------- 配置
+
+
+@dataclass
+class Outline:
+    chapters: list[dict]
+    source_notes: dict[str, str]
+
+    @property
+    def section_ids(self) -> list[str]:
+        return [c["id"] for c in self.chapters if c.get("level") == "section"]
+
+    @property
+    def all_ids(self) -> list[str]:
+        return [c["id"] for c in self.chapters]
+
+
+def load_outline(config_dir: Path | str = Path("config")) -> Outline:
+    path = Path(config_dir) / "sections.yaml"
+    raw = yaml.safe_load(path.read_text(encoding="utf-8"))
+    chapters = raw["chapters"]
+    for c in chapters:
+        if c.get("level") not in ("chapter", "section"):
+            raise ValueError(f"未知层级: {c.get('level')} （章节 {c.get('id')}）")
+    return Outline(chapters=chapters, source_notes=raw.get("source_notes") or {})
+
+
+_SECTION_IDS: list[str] = []      # 兼容旧调用，由 build_report 首次运行时填充
+
+
+def section_ids(config_dir: Path | str = Path("config")) -> list[str]:
+    return load_outline(config_dir).section_ids
+
+
+# --------------------------------------------------------------------- 草稿
 
 
 def load_drafts(path: Path) -> dict[str, str]:
@@ -59,20 +87,10 @@ def load_drafts(path: Path) -> dict[str, str]:
     return drafts
 
 
-_SNAPSHOT_LABELS = {
-    "932047": "中证REITs全收益指数",
-    "932006": "中证REITs（收盘）指数",
-    "H00300": "沪深300全收益指数",
-    "H00922": "中证红利全收益指数",
-    "CBA00201": "中债综合财富指数",
-}
-
-REITS_INDEX_CODES = ["932047", "932006"]
-CROSS_ASSET_CODES = ["932047", "H00300", "H00922", "CBA00201"]
+# --------------------------------------------------------------------- 块
 
 
 def _index_rows(facts: FactsBundle, codes: list[str]) -> list[tuple[str, str, str, str]]:
-    """按代码取当期点位、周涨跌、年初至今，拼成表格行。"""
     def val(metric: str, code: str) -> str:
         items = [f for f in facts.by_metric(metric) if f.params.get("code") == code]
         return items[0].display if items else "—"
@@ -84,6 +102,107 @@ def _index_rows(facts: FactsBundle, codes: list[str]) -> list[tuple[str, str, st
     ]
 
 
+@dataclass
+class _Ctx:
+    doc: object
+    result: CaseResult
+    charts_dir: Path
+    boards_order: list[str]
+    source_notes: dict[str, str]
+
+    @property
+    def quotes(self) -> pd.DataFrame:
+        return self.result.quotes
+
+    @property
+    def pending(self) -> pd.DataFrame | None:
+        return getattr(self.result, "pending", None)
+
+    @property
+    def comparable(self) -> pd.DataFrame:
+        return self.quotes[self.quotes["close_prev"].notna()]
+
+    def note(self, block: str) -> None:
+        text = self.source_notes.get(block)
+        if text:
+            W.add_source_note(self.doc, text)
+
+
+def _b_index_reits(ctx: _Ctx) -> None:
+    T.index_table(ctx.doc, _index_rows(ctx.result.facts, REITS_INDEX_CODES))
+    ctx.note("index_table_reits")
+
+
+def _b_chart_reits(ctx: _Ctx) -> None:
+    W.add_chart(ctx.doc, ctx.charts_dir / "chart_reits_index.png")
+    ctx.note("chart_reits_index")
+
+
+def _b_index_cross(ctx: _Ctx) -> None:
+    T.index_table(ctx.doc, _index_rows(ctx.result.facts, CROSS_ASSET_CODES))
+    ctx.note("index_table_cross")
+
+
+def _b_chart_cross(ctx: _Ctx) -> None:
+    W.add_chart(ctx.doc, ctx.charts_dir / "chart_cross_asset.png")
+    ctx.note("chart_cross_asset")
+
+
+def _b_quotes(ctx: _Ctx) -> None:
+    T.quotes_table(ctx.doc, ctx.quotes, ctx.boards_order)
+    ctx.note("quotes_table")
+
+
+def _b_chart_turnover(ctx: _Ctx) -> None:
+    W.add_chart(ctx.doc, ctx.charts_dir / "chart_board_turnover.png")
+    ctx.note("chart_board_turnover")
+
+
+def _b_chart_turnover_rate(ctx: _Ctx) -> None:
+    W.add_chart(ctx.doc, ctx.charts_dir / "chart_board_turnover_rate.png")
+    ctx.note("chart_board_turnover_rate")
+
+
+def _b_pnav(ctx: _Ctx) -> None:
+    pv = valuation.pnav_summary(ctx.comparable)
+    by_board = valuation.pnav_by_board(ctx.comparable)
+    T.pnav_table(
+        ctx.doc,
+        by_board,
+        {
+            "median": pv.median,
+            "discount_pct": pv.median_discount_pct,
+            "weighted": pv.weighted,
+            "n_premium": pv.n_premium,
+            "n_discount": pv.n_discount,
+        },
+    )
+    ctx.note("pnav_table")
+
+
+def _b_pending(ctx: _Ctx) -> None:
+    if ctx.pending is None or not len(ctx.pending):
+        return
+    T.pending_table(ctx.doc, ctx.pending)
+    ctx.note("pending_table")
+
+
+_BLOCKS = {
+    "index_table_reits": _b_index_reits,
+    "chart_reits_index": _b_chart_reits,
+    "index_table_cross": _b_index_cross,
+    "chart_cross_asset": _b_chart_cross,
+    "quotes_table": _b_quotes,
+    "chart_board_turnover": _b_chart_turnover,
+    "chart_board_turnover_rate": _b_chart_turnover_rate,
+    "pnav_table": _b_pnav,
+    "pending_table": _b_pending,
+}
+
+
+# --------------------------------------------------------------------- 装配
+
+
 def build_report(
     result: CaseResult,
     drafts: dict[str, str],
@@ -91,19 +210,26 @@ def build_report(
     charts_dir: Path,
     *,
     boards_order: list[str],
-    source_label: str = "Choice",
+    config_dir: Path | str = Path("config"),
 ) -> Path:
-    """按 OUTLINE 装配整份报告。草稿缺节时写入占位提示，不抛错 —— 便于分段调试。"""
+    """按 ``config/sections.yaml`` 装配整份报告。
+
+    草稿缺节时写入占位提示而非抛错，便于分段调试；正式出稿前由
+    ``G-STYLE-01`` 检查章节是否齐全。
+    """
+    outline = load_outline(config_dir)
     doc = W._setup_document()
     label = W.period_label(result.week.start, result.week.end)
     W.setup_footer(doc, label)
     W.add_title(doc, f"公募REITs周报（{label}）")
 
-    quotes = result.quotes
-    pending = getattr(result, "pending", None)
-    comparable = quotes[quotes["close_prev"].notna()]
-    pv = valuation.pnav_summary(comparable)
-    by_board = valuation.pnav_by_board(comparable)
+    ctx = _Ctx(
+        doc=doc,
+        result=result,
+        charts_dir=Path(charts_dir),
+        boards_order=boards_order,
+        source_notes=outline.source_notes,
+    )
 
     def body_of(sid: str) -> None:
         text = drafts.get(sid, "").strip()
@@ -113,47 +239,24 @@ def build_report(
         for para in W.split_paragraphs(text):
             W.add_body(doc, para)
 
-    for level, sid, title in OUTLINE:
-        if level == "chapter":
-            W.add_chapter(doc, title)
+    for chapter in outline.chapters:
+        if chapter["level"] == "chapter":
+            W.add_chapter(doc, chapter["title"])
             continue
 
-        W.add_section_heading(doc, title)
-        body_of(sid)
+        sid = chapter["id"]
+        W.add_section_heading(doc, chapter["title"])
+        if chapter.get("body", True):
+            body_of(sid)
 
-        # ---- 各节的表与图 ----
-        if sid == "1.1":
-            T.index_table(doc, _index_rows(result.facts, REITS_INDEX_CODES))
-            W.add_source_note(doc, source_label)
-            W.add_chart(doc, Path(charts_dir) / "chart_reits_index.png")
-            T.index_table(doc, _index_rows(result.facts, CROSS_ASSET_CODES))
-            W.add_source_note(doc, source_label)
-            W.add_chart(doc, Path(charts_dir) / "chart_cross_asset.png")
-        elif sid == "1.2":
-            T.quotes_table(doc, quotes, boards_order)
-            W.add_source_note(doc, f"{source_label}；收盘价为前复权价格口径")
-        elif sid == "1.3":
-            pass
-        elif sid == "2.2" and pending is not None and len(pending):
-            T.pending_table(doc, pending)
-            W.add_source_note(doc, "上交所、深交所 REITs 项目动态")
-        elif sid == "1.4":
-            W.add_chart(doc, Path(charts_dir) / "chart_board_turnover.png")
-            W.add_chart(doc, Path(charts_dir) / "chart_board_turnover_rate.png")
-            W.add_source_note(doc, source_label)
-        elif sid == "1.5":
-            T.pnav_table(
-                doc,
-                by_board,
-                {
-                    "median": pv.median,
-                    "discount_pct": pv.median_discount_pct,
-                    "weighted": pv.weighted,
-                    "n_premium": pv.n_premium,
-                    "n_discount": pv.n_discount,
-                },
-            )
-            W.add_source_note(doc, source_label)
+        for block in chapter.get("blocks") or []:
+            fn = _BLOCKS.get(block)
+            if fn is None:
+                raise KeyError(
+                    f"sections.yaml 中 {sid} 引用了未注册的块 {block!r}；"
+                    f"可用块: {sorted(_BLOCKS)}"
+                )
+            fn(ctx)
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     doc.save(str(out_path))

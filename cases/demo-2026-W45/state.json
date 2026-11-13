@@ -1,8 +1,8 @@
 {
   "case_id": "demo-2026-W45",
   "pipeline_version": "0.1.0",
-  "stage": "HUMAN_REVIEW",
-  "status": "BLOCKED",
+  "stage": "QA",
+  "status": "DONE",
   "info_cutoff": "2026-11-08T23:59:59+08:00",
   "input_hash": "f489866618ac5efae8da7c6b8349888ffdf899cd807985b57dc8c543c45f10c0",
   "input_hashes": {
@@ -13,72 +13,79 @@
     {
       "path": "facts/facts.json",
       "stage": "FACTS",
-      "sha256": "da5f726002cd32f7e1c48e8d83a08eeff5ca02d785e48c1cea71fc7a06580926",
+      "sha256": "2f7308d79bdd9fdb0070cf82817b37d305b555e69f8ab042c71bd3ee2ee92add",
       "bytes": 238988,
-      "produced_at": "2026-11-14T03:14:49+08:00"
+      "produced_at": "2026-11-14T03:24:12+08:00"
     },
     {
       "path": "work/quotes_normalized.csv",
       "stage": "FACTS",
       "sha256": "c814726e3b9da96cc50354ae3ad2fd6c82bf24678963581e3a0e4d9f50baf84e",
       "bytes": 18668,
-      "produced_at": "2026-11-14T03:14:49+08:00"
+      "produced_at": "2026-11-14T03:24:12+08:00"
     },
     {
       "path": "work/provenance.json",
       "stage": "FACTS",
-      "sha256": "1557575603d5585437f9c6be2b68a095b33573ff70e23e0e0988213b15ac0b5c",
+      "sha256": "607368059460a88925644a0a5d0be37720de9a4a951c1d5fcfb39e4361d09c9b",
       "bytes": 641,
-      "produced_at": "2026-11-14T03:14:49+08:00"
-    },
-    {
-      "path": "drafts/composed.json",
-      "stage": "DRAFT",
-      "sha256": "c01e0da1507869a9e190c8914684179f9ba4df8f03f7e85cfb1cdf4ae7d76276",
-      "bytes": 12661,
-      "produced_at": "2026-11-14T03:14:50+08:00"
+      "produced_at": "2026-11-14T03:24:12+08:00"
     },
     {
       "path": "work/charts/chart_board_turnover.png",
       "stage": "CHART",
       "sha256": "a72e5e8ad422c21062dec735654c0aa163af9257dbcba1e123a351f164702171",
       "bytes": 93677,
-      "produced_at": "2026-11-14T03:14:53+08:00"
+      "produced_at": "2026-11-14T03:24:13+08:00"
     },
     {
       "path": "work/charts/chart_board_turnover_rate.png",
       "stage": "CHART",
       "sha256": "47f1e60d761d0d92d8e58fe72a052af61453a06e70299b79bc010df36292b825",
       "bytes": 91480,
-      "produced_at": "2026-11-14T03:14:53+08:00"
+      "produced_at": "2026-11-14T03:24:13+08:00"
     },
     {
       "path": "work/charts/chart_cross_asset.png",
       "stage": "CHART",
       "sha256": "16853e516afebc243ae0c6b90fe656696259bb1a442a3f0349555a5385ea44a2",
       "bytes": 218142,
-      "produced_at": "2026-11-14T03:14:53+08:00"
+      "produced_at": "2026-11-14T03:24:13+08:00"
     },
     {
       "path": "work/charts/chart_reits_index.png",
       "stage": "CHART",
       "sha256": "0b99bcff1c1c09f86fc80e4eaeb95678b959302da37552c1836522a9593a1322",
       "bytes": 146004,
-      "produced_at": "2026-11-14T03:14:53+08:00"
+      "produced_at": "2026-11-14T03:24:13+08:00"
+    },
+    {
+      "path": "drafts/composed.json",
+      "stage": "DRAFT",
+      "sha256": "c01e0da1507869a9e190c8914684179f9ba4df8f03f7e85cfb1cdf4ae7d76276",
+      "bytes": 12661,
+      "produced_at": "2026-11-14T03:24:13+08:00"
     },
     {
       "path": "qa/gates.json",
       "stage": "HARD_GATES",
-      "sha256": "e8e71d4647bad64fc2c712fdde6983d6e1c9e9de92deacf265c59cb0b8afb0b2",
-      "bytes": 1152,
-      "produced_at": "2026-11-14T03:14:53+08:00"
+      "sha256": "9c76b274ad0e29389cbffea2787c1917a713b0ddac6743fa7e37ed161a645817",
+      "bytes": 1326,
+      "produced_at": "2026-11-14T03:24:15+08:00"
     },
     {
       "path": "qa/critic.json",
       "stage": "CRITIC",
       "sha256": "e76c79ad189228fd3f7ca237c0272448cda11633c07d0804858cac1352b00f36",
       "bytes": 2968,
-      "produced_at": "2026-11-14T03:14:53+08:00"
+      "produced_at": "2026-11-14T03:24:15+08:00"
+    },
+    {
+      "path": "out/REITs周报_demo-2026-W45.docx",
+      "stage": "RENDER",
+      "sha256": "0d730a8d777a33598f2870421741402f3680e7d6ab53c4113ff9db9b596836e1",
+      "bytes": 578022,
+      "produced_at": "2026-11-14T03:24:16+08:00"
     }
   ],
   "gates": {
@@ -135,97 +142,125 @@
     "G-SRC-01": {
       "id": "G-SRC-01",
       "ok": true,
-      "detail": "扫描 83 个文本文件，未发现凭证",
-      "checked": 83,
+      "detail": "扫描 96 个文本文件，未发现凭证",
+      "checked": 96,
+      "failed": 0,
+      "samples": []
+    },
+    "G-SRC-02": {
+      "id": "G-SRC-02",
+      "ok": true,
+      "detail": "数据源 license='public-market-data' 已登记",
+      "checked": 0,
       "failed": 0,
       "samples": []
     }
   },
   "budget": {},
-  "approvals": [],
+  "approvals": [
+    {
+      "gate": "HUMAN_REVIEW",
+      "by": "周豪波",
+      "decision": "approve",
+      "artifact_sha256": "c01e0da1507869a9e190c8914684179f9ba4df8f03f7e85cfb1cdf4ae7d76276",
+      "comment": "复核后签发",
+      "at": "2026-11-14T03:24:14+08:00"
+    }
+  ],
   "history": [
     {
-      "at": "2026-11-14T03:14:49+08:00",
+      "at": "2026-11-14T03:24:12+08:00",
       "from": "INIT",
       "to": "INGEST",
       "reason": "开始取数"
     },
     {
-      "at": "2026-11-14T03:14:49+08:00",
+      "at": "2026-11-14T03:24:12+08:00",
       "from": "INGEST",
       "to": "COMPUTE",
       "reason": "归一化与计算"
     },
     {
-      "at": "2026-11-14T03:14:49+08:00",
+      "at": "2026-11-14T03:24:12+08:00",
       "from": "COMPUTE",
       "to": "FACTS",
       "reason": "登记 355 条事实"
     },
     {
-      "at": "2026-11-14T03:14:49",
+      "at": "2026-11-14T03:24:12",
       "event": "LOG",
       "msg": "事实库 355 条，板块差异 1 条"
     },
     {
-      "at": "2026-11-14T03:14:50+08:00",
+      "at": "2026-11-14T03:24:13+08:00",
       "from": "FACTS",
       "to": "CHART",
       "reason": "四张图完成"
     },
     {
-      "at": "2026-11-14T03:14:50+08:00",
+      "at": "2026-11-14T03:24:13+08:00",
       "from": "CHART",
       "to": "DRAFT",
       "reason": "装配 14 节"
     },
     {
-      "at": "2026-11-14T03:14:50+08:00",
+      "at": "2026-11-14T03:24:13+08:00",
       "from": "DRAFT",
       "to": "MERGE",
       "reason": "草稿合并"
     },
     {
-      "at": "2026-11-14T03:14:50+08:00",
+      "at": "2026-11-14T03:24:13+08:00",
       "from": "MERGE",
       "to": "HARD_GATES",
-      "reason": "七条门禁全部通过"
+      "reason": "八条门禁全部通过"
     },
     {
-      "at": "2026-11-14T03:14:50+08:00",
+      "at": "2026-11-14T03:24:13+08:00",
       "from": "HARD_GATES",
       "to": "CRITIC",
       "reason": "Critic 均分 4.85，接受"
     },
     {
-      "at": "2026-11-14T03:14:52",
+      "at": "2026-11-14T03:24:15",
       "event": "LOG",
       "msg": "事实库未变，跳过取数与计算"
     },
     {
-      "at": "2026-11-14T03:14:53+08:00",
-      "from": "HUMAN_REVIEW",
-      "to": "CHART",
-      "reason": "四张图完成"
+      "at": "2026-11-14T03:24:15",
+      "event": "LOG",
+      "msg": "图表未变，跳过"
     },
     {
-      "at": "2026-11-14T03:14:53",
+      "at": "2026-11-14T03:24:15",
       "event": "LOG",
       "msg": "草稿未变，跳过"
     },
     {
-      "at": "2026-11-14T03:14:53+08:00",
-      "from": "CHART",
+      "at": "2026-11-14T03:24:15+08:00",
+      "from": "HUMAN_REVIEW",
       "to": "HARD_GATES",
-      "reason": "七条门禁全部通过"
+      "reason": "八条门禁全部通过"
     },
     {
-      "at": "2026-11-14T03:14:53+08:00",
+      "at": "2026-11-14T03:24:15+08:00",
       "from": "HARD_GATES",
       "to": "CRITIC",
       "reason": "Critic 均分 4.85，接受"
+    },
+    {
+      "at": "2026-11-14T03:24:16+08:00",
+      "from": "CRITIC",
+      "to": "RENDER",
+      "reason": "docx 生成完成"
+    },
+    {
+      "at": "2026-11-14T03:24:16+08:00",
+      "from": "RENDER",
+      "to": "QA",
+      "reason": "质检完成"
     }
   ],
-  "blocked_reason": "等待人工审批",
-  "resume_hint": "审阅 cases/<case>/out 下的草稿与 gate 结果，然后执行 approve"
+  "blocked_reason": "",
+  "resume_hint": ""
 }

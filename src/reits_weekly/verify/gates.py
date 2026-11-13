@@ -10,11 +10,13 @@
 
 from __future__ import annotations
 
+import functools
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
 import pandas as pd
+import yaml
 
 from ..facts import FactsBundle
 
@@ -41,17 +43,27 @@ class GateResult:
 
 # --------------------------------------------------------------------- 数字审计
 
-#: 正文里允许出现的非事实数字。每一项都要有理由，不能为了"让门禁通过"而加。
-ALLOWED_PATTERNS = [
-    (r"\d+年期", "期限名称，如 10年期国债"),
-    (r"DR007", "资金利率品种代码"),
-    (r"\d{4}[-./年]\d{1,2}[-./月]\d{1,2}", "日期"),
-    (r"\d{4}年", "年份"),
-    (r"第[一二三四五六七八九十]", "序数，中文数字"),
-    (r"沪深\s*300", "指数名称中的数字"),
-    (r"中证\s*\d+", "指数名称中的数字"),
-    (r"\d+\.\d+\s*节", "章节交叉引用"),
-]
+DEFAULT_CONFIG_DIR = Path(__file__).resolve().parents[3] / "config"
+
+
+@functools.lru_cache(maxsize=4)
+def load_config(config_dir: str | None = None) -> dict:
+    """读取 config/gates.yaml。
+
+    阈值与白名单放在配置里而不是代码里：调整需要走配置变更，会在 git 历史留痕，
+    也就不会顺手把校验逻辑本身改掉。
+    """
+    path = Path(config_dir) if config_dir else DEFAULT_CONFIG_DIR
+    f = path / "gates.yaml"
+    if not f.exists():
+        return {}
+    return yaml.safe_load(f.read_text(encoding="utf-8")) or {}
+
+
+def allowed_patterns(config_dir: str | None = None) -> list[tuple[str, str]]:
+    """正文里允许出现的非事实数字。每条都要有理由，不能为了过门禁而添加。"""
+    raw = (load_config(config_dir).get("numeric_audit") or {}).get("allowed_patterns") or []
+    return [(r["pattern"], r.get("reason", "")) for r in raw]
 
 _NUM_RE = re.compile(r"-?\d[\d,]*(?:\.\d+)?")
 
@@ -75,15 +87,15 @@ def _normalize(token: str) -> str:
     return f"{v:.6f}".rstrip("0").rstrip(".")
 
 
-def _allowed(token: str, context: str) -> str | None:
-    for pattern, why in ALLOWED_PATTERNS:
+def _allowed(token: str, context: str, config_dir: str | None = None) -> str | None:
+    for pattern, why in allowed_patterns(config_dir):
         if re.search(pattern, context):
             return why
     return None
 
 
 def numeric_audit(
-    sections: dict[str, str], bundle: FactsBundle
+    sections: dict[str, str], bundle: FactsBundle, config_dir: str | None = None
 ) -> GateResult:
     """G-NUM-01：正文每个数字都必须能映射到某条事实的 display。
 
@@ -108,7 +120,7 @@ def numeric_audit(
             lo = max(0, m.start() - 12)
             hi = min(len(text), m.end() + 12)
             context = text[lo:hi]
-            if _allowed(token, context):
+            if _allowed(token, context, config_dir):
                 continue
             failed += 1
             if len(samples) < 10:
@@ -127,8 +139,9 @@ def numeric_audit(
 # --------------------------------------------------------------------- 勾稽
 
 
-def crossfoot(bundle: FactsBundle) -> GateResult:
+def crossfoot(bundle: FactsBundle, config_dir: str | None = None) -> GateResult:
     """G-NUM-02：合计类指标必须闭合。"""
+    tol = float((load_config(config_dir).get("crossfoot") or {}).get("tolerance_yi", 0.02))
     problems: list[str] = []
 
     def one(metric: str, default=None):
@@ -147,7 +160,7 @@ def crossfoot(bundle: FactsBundle) -> GateResult:
 
     total = one("turnover.total")
     parts = sum(f.value for f in bundle.by_metric("turnover.board"))
-    if total is not None and abs(parts - total) > 0.02:
+    if total is not None and abs(parts - total) > tol:
         problems.append(f"板块成交合计 {parts:.2f} ≠ 全市场 {total:.2f}")
 
     n_prem = one("pnav.n_premium")
@@ -168,25 +181,17 @@ def crossfoot(bundle: FactsBundle) -> GateResult:
 # --------------------------------------------------------------------- 一致性
 
 
-def unit_sanity(bundle: FactsBundle) -> GateResult:
+def unit_sanity(bundle: FactsBundle, config_dir: str | None = None) -> GateResult:
     """G-UNIT-01：数值落在合理区间，防止"百分数存成小数"这类单位错误。"""
+    ranges = (load_config(config_dir).get("unit_sanity") or {}).get("ranges") or {}
     problems: list[str] = []
 
-    for f in bundle.by_metric("market.eq_return"):
-        if not (-30 <= f.value <= 30):
-            problems.append(f"全市场周收益 {f.value} 超出 [-30,30]，疑似单位错误")
-
-    for f in bundle.by_metric("board.eq_return"):
-        if not (-40 <= f.value <= 40):
-            problems.append(f"板块 {f.params.get('board')} 等权收益 {f.value} 越界")
-
-    for f in bundle.by_metric("turnover.rate"):
-        if not (0 <= f.value <= 50):
-            problems.append(f"换手率 {f.value} 越界")
-
-    for f in bundle.by_metric("pnav.median"):
-        if not (0.05 <= f.value <= 10):
-            problems.append(f"P/NAV 中位数 {f.value} 越界")
+    for metric, bounds in ranges.items():
+        lo, hi = float(bounds[0]), float(bounds[1])
+        for f in bundle.by_metric(metric):
+            if not (lo <= f.value <= hi):
+                label = f.params.get("board") or ""
+                problems.append(f"{metric}{(' ' + label) if label else ''} = {f.value} 超出 [{lo}, {hi}]")
 
     return GateResult(
         id="G-UNIT-01", ok=not problems,
@@ -240,10 +245,15 @@ SECRET_PATTERNS = [
 ]
 
 
-def secret_scan(root: Path, max_bytes: int = 2_000_000) -> GateResult:
+def secret_scan(root: Path, max_bytes: int | None = None,
+                config_dir: str | None = None) -> GateResult:
     """G-SRC-01：仓库内不得含凭证。扫描文本类文件，跳过 .git 与二进制。"""
-    skip_dirs = {".git", ".venv", "__pycache__", ".pytest_cache", "node_modules"}
-    text_ext = {".py", ".md", ".yaml", ".yml", ".json", ".csv", ".txt", ".ps1", ".sh", ".toml"}
+    cfg = load_config(config_dir).get("secret_scan") or {}
+    skip_dirs = set(cfg.get("skip_dirs") or
+                    [".git", ".venv", "__pycache__", ".pytest_cache", "node_modules"])
+    text_ext = set(cfg.get("text_ext") or
+                   [".py", ".md", ".yaml", ".yml", ".json", ".csv", ".txt", ".ps1", ".sh", ".toml"])
+    max_bytes = max_bytes or int(cfg.get("max_bytes", 2_000_000))
     hits: list[str] = []
     scanned = 0
 
@@ -279,10 +289,13 @@ REQUIRED_SECTIONS = ["0.1", "0.2", "0.3", "1.1", "1.2", "1.3",
 DATA_GAP_MARKERS = ("数据缺口", "尚未接入")
 
 
-def structure_check(sections: dict[str, str]) -> GateResult:
+def structure_check(sections: dict[str, str], config_dir: str | None = None) -> GateResult:
     """G-STYLE-01：章节齐全、风险提示只出现一次、数据缺口已显式标注。"""
+    cfg = load_config(config_dir).get("structure") or {}
+    required = cfg.get("required_sections") or REQUIRED_SECTIONS
+    markers = tuple(cfg.get("data_gap_markers") or DATA_GAP_MARKERS)
     problems = []
-    missing = [s for s in REQUIRED_SECTIONS if s not in sections]
+    missing = [s for s in required if s not in sections]
     if missing:
         problems.append(f"缺章节: {missing}")
 
@@ -294,12 +307,36 @@ def structure_check(sections: dict[str, str]) -> GateResult:
     if body_repeats != 0:
         problems.append(f"正文中重复出现'风险提示' {body_repeats} 次，应只在文末出现")
 
-    gaps = [sid for sid, text in sections.items()
-            if any(m in text for m in DATA_GAP_MARKERS)]
+    gaps = [sid for sid, text in sections.items() if any(m in text for m in markers)]
     detail = "；".join(problems) if problems else f"结构完整；{len(gaps)} 节标注数据缺口"
     return GateResult(
         id="G-STYLE-01", ok=not problems, detail=detail,
         failed=len(problems), samples=problems + [f"数据缺口节: {gaps}"],
+    )
+
+
+def source_whitelist(source_meta: dict, config_dir: str | None = None) -> GateResult:
+    """G-SRC-02：数据源的 license 必须在白名单内。
+
+    数据来源合规不能只写在文档里。这条门禁让"允许使用哪些数据"变成
+    可执行的判断——未经登记的数据源无法进入流程。
+    """
+    cfg = Path(config_dir) if config_dir else DEFAULT_CONFIG_DIR
+    f = cfg / "sources.yaml"
+    if not f.exists():
+        return GateResult(id="G-SRC-02", ok=True, detail="未配置 sources.yaml，跳过")
+
+    raw = yaml.safe_load(f.read_text(encoding="utf-8")) or {}
+    allowed = set(raw.get("allowed_licenses") or [])
+    license_ = (source_meta or {}).get("license", "")
+    ok = license_ in allowed
+    return GateResult(
+        id="G-SRC-02",
+        ok=ok,
+        detail=(f"数据源 license={license_!r} 已登记" if ok
+                else f"数据源 license={license_!r} 不在白名单 {sorted(allowed)}"),
+        failed=0 if ok else 1,
+        samples=[] if ok else [f"source_id={source_meta.get('source_id')}"],
     )
 
 
@@ -309,14 +346,17 @@ def run_all(
     quotes: pd.DataFrame,
     cutoff: str,
     repo_root: Path,
+    config_dir: str | None = None,
+    source_meta: dict | None = None,
 ) -> list[GateResult]:
     """按顺序跑全部硬门禁。任一失败即应阻断推进。"""
     return [
-        numeric_audit(sections, bundle),
-        crossfoot(bundle),
-        unit_sanity(bundle),
+        numeric_audit(sections, bundle, config_dir),
+        crossfoot(bundle, config_dir),
+        unit_sanity(bundle, config_dir),
         board_consistency(quotes),
         point_in_time(bundle, cutoff),
-        structure_check(sections),
-        secret_scan(repo_root),
+        structure_check(sections, config_dir),
+        secret_scan(repo_root, config_dir=config_dir),
+        source_whitelist(source_meta or {}, config_dir),
     ]

@@ -1,0 +1,108 @@
+{
+  "case": "demo-2026-W45",
+  "note": "固定基线：改动后若这些数值变化，必须同步更新本文件并在 CHANGELOG 说明",
+  "metrics": {
+    "breadth.down": {
+      "value": 50,
+      "display": "50.00",
+      "formula": "ret_total < -1e-9"
+    },
+    "breadth.flat": {
+      "value": 3,
+      "display": "3.00",
+      "formula": "n - up - down"
+    },
+    "breadth.n": {
+      "value": 94,
+      "display": "94.00",
+      "formula": "count(non-null ret_total)"
+    },
+    "breadth.up": {
+      "value": 41,
+      "display": "41.00",
+      "formula": "ret_total > 1e-9"
+    },
+    "market.eq_return": {
+      "value": -0.7505196409711484,
+      "display": "-0.75%",
+      "formula": "mean(ret_total)"
+    },
+    "market.median_return": {
+      "value": -0.07925539256475794,
+      "display": "-0.08%",
+      "formula": "median(ret_total)"
+    },
+    "pending.expansion": {
+      "value": 4,
+      "display": "4.00",
+      "formula": "count(category == 扩募)"
+    },
+    "pending.ipo": {
+      "value": 43,
+      "display": "43.00",
+      "formula": "count(category != 扩募)"
+    },
+    "pending.total": {
+      "value": 47,
+      "display": "47.00",
+      "formula": "count(primary_pipeline)"
+    },
+    "pnav.max": {
+      "value": 1.673602241358,
+      "display": "1.674",
+      "formula": "max(pnav)"
+    },
+    "pnav.median": {
+      "value": 1.05461721646678,
+      "display": "1.055",
+      "formula": "median(pnav)"
+    },
+    "pnav.min": {
+      "value": 0.422978980534335,
+      "display": "0.423",
+      "formula": "min(pnav)"
+    },
+    "pnav.n_discount": {
+      "value": 38,
+      "display": "38.00",
+      "formula": "pnav < 1"
+    },
+    "pnav.n_premium": {
+      "value": 56,
+      "display": "56.00",
+      "formula": "pnav >= 1"
+    },
+    "pnav.weighted": {
+      "value": 1.091337552896877,
+      "display": "1.091",
+      "formula": "sum(pnav*mktcap_total)/sum(mktcap_total)"
+    },
+    "turnover.avg_daily": {
+      "value": 4.385777053818001,
+      "display": "4.39",
+      "formula": "sum(turnover_week)/n_days"
+    },
+    "turnover.mom": {
+      "value": -9.14221026982467,
+      "display": "-9.1%",
+      "formula": "(cur-prev)/prev*100"
+    },
+    "turnover.total": {
+      "value": 21.928885269090003,
+      "display": "21.93",
+      "formula": "sum(turnover_week)"
+    },
+    "board.eq_return": {
+      "数据中心": 1.6946976784665215,
+      "水利设施": 0.8018925219282924,
+      "保障性租赁住房": 0.6265529691483613,
+      "消费基础设施": 0.20123947102041292,
+      "交通基础设施": -0.2840416115340675,
+      "能源基础设施": -0.3163479214119484,
+      "生态环保": -0.33471415037525887,
+      "仓储物流": -0.7789085262653597,
+      "产业园区": -2.33057510981811,
+      "商业不动产": -3.360725153783847
+    }
+  }
+}

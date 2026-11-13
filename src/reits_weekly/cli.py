@@ -21,28 +21,32 @@ from . import controller
 
 
 def _cfg(args) -> controller.RunConfig:
+    """先读 config/settings.yaml 作为默认，再用命令行显式参数覆盖。"""
     root = Path(args.root).resolve() if args.root else Path(__file__).resolve().parents[2]
-    return controller.RunConfig(
-        repo_root=root,
-        case_id=args.case,
-        source=args.source,
-        week_start=args.week_start,
-        week_end=args.week_end,
-        week_prev_end=args.week_prev,
-        info_cutoff=args.cutoff,
-    )
+    cfg = controller.RunConfig.from_config(root, case_id=args.case)
+    if args.source:
+        cfg.source = args.source
+    if args.week_start:
+        cfg.week_start = args.week_start
+    if args.week_end:
+        cfg.week_end = args.week_end
+    if args.week_prev:
+        cfg.week_prev_end = args.week_prev
+    if args.cutoff:
+        cfg.info_cutoff = args.cutoff
+    return cfg
 
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(prog="reits-weekly", description="公募REITs周报自动化")
     ap.add_argument("--root", help="项目根目录，默认自动推断")
-    ap.add_argument("--case", default="demo-2026-W45", help="期次标识")
-    ap.add_argument("--source", default="fixture", help="数据源：fixture（默认）")
-    ap.add_argument("--week-start", default="2026-11-02")
-    ap.add_argument("--week-end", default="2026-11-06")
-    ap.add_argument("--week-prev", default="2026-10-30")
-    ap.add_argument("--cutoff", default="2026-11-08T23:59:59+08:00",
-                    help="信息截止时点，晚于此的公告不得使用")
+    ap.add_argument("--case", default=None, help="期次标识，默认读 config/settings.yaml")
+    ap.add_argument("--source", default=None, help="数据源，默认 fixture")
+    ap.add_argument("--week-start", default=None)
+    ap.add_argument("--week-end", default=None)
+    ap.add_argument("--week-prev", default=None)
+    ap.add_argument("--cutoff", default=None,
+                    help="信息截止时点，晚于此的公告不得使用；默认读配置")
 
     sub = ap.add_subparsers(dest="cmd", required=True)
 

@@ -53,16 +53,13 @@ def quotes(adapter, boards, week):
 
 
 @pytest.fixture(scope="session")
-def facts(adapter, boards, week, quotes):
-    """2026-W45 期的完整事实库。"""
-    from reits_weekly.compute.aggregate import build_facts
+def facts(adapter, boards, week):
+    """2026-W45 期的完整事实库。
 
-    return build_facts(
-        quotes,
-        adapter.turnover_weekly(week),
-        week,
-        CASE_ID,
-        adapter.meta.raw_hash,
-        boards,
-        adapter.meta.as_dict(),
-    )
+    刻意走 ``pipeline.prepare`` 而不是直接调 ``build_facts``：
+    测试与生产必须用同一条装配路径，否则容易漏传参数
+    （曾经就因为漏传一级市场数据，导致测试看到的事实库与真实运行不一致）。
+    """
+    from reits_weekly import pipeline
+
+    return pipeline.prepare(adapter, week, boards, CASE_ID).facts

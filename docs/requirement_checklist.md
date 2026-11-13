@@ -19,7 +19,7 @@
 | 1.8 | 允许来源（permitted sources） | 四个白名单来源 + 明确禁止项 | `design_note.md` §1.4 |
 | 1.9 | 信息截止（information cutoffs） | 收盘 15:00 定价；公告截至周日 23:59；由 `info_cutoff` 强制 | `design_note.md` §1.4；`gates.py::point_in_time` |
 | 1.10 | 工作产品（work products） | docx 报告 + facts.json + gates.json + state.json | `cases/demo-2026-W45/out/`、`facts/`、`qa/` |
-| 1.11 | 验收标准（acceptance criteria） | 七条可判定门禁 + 三项需判断的评审 | `design_note.md` §1.5；`verify/gates.py` |
+| 1.11 | 验收标准（acceptance criteria） | 八条可判定门禁 + 三项需判断的评审 | `design_note.md` §1.5；`verify/gates.py` |
 | 1.12 | 解释为何需要持久工作流而非一次性脚本 | 四条理由：口径跨期一致、可中断续跑、可验证改动、可拦错 | `design_note.md` §1.6 |
 
 ---
@@ -59,7 +59,7 @@
 | 2c.1 | 独立于产出方的检查 | Critic 只看成稿、事实库、上期观点，看不到推理过程 | `draft/critic.py`；`prompts/critic.md` |
 | 2c.2 | 有后果动作前的人工审批 | 门禁通过后**必然停下**，签字绑定草稿 sha256 | `controller.py`；`state.add_approval` |
 | 2c.3 | 有界修订循环 | ≤2 轮，超出转 ESCALATED；耗尽不等于通过 | `design_note.md` §2.3 |
-| 2c.4 | 对固定基线测试改动 | `tests/golden` 数值断言；改动被拦的实例 | `docs/verification_evidence/rollback_demo.md` |
+| 2c.4 | 对固定基线测试改动 | `tests/golden/baseline_2026-W45.json` + `test_golden.py`；改动被拦的实例 | `docs/verification_evidence/rollback_demo.md` |
 | 2c.5 | 接受或拒绝 | 基线测试退出码非 0 即拒绝该改动 | 同上 |
 | 2c.6 | 记录版本 | `pipeline_version` + git tag `baseline-v0.1.0` + `CHANGELOG.md` | `CHANGELOG.md`；`git tag` |
 | 2c.7 | 回滚 | 临时克隆中实跑 `git reset --hard` 并验证恢复 | `docs/verification_evidence/rollback_demo.md` |

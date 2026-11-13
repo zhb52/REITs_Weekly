@@ -1,0 +1,64 @@
+# 数据源白名单
+#
+# 设计说明 1.4 节列出的允许来源，在这里是可执行的清单而不是文字描述。
+# 门禁 G-SRC-02 会核对适配器声明的 license 是否在本文件中获准，
+# 不在白名单的数据源无法进入流程。
+#
+# 新增数据源必须同时：
+#   1. 在本文件登记 license 与用途
+#   2. 在 design_note.md 1.4 节说明
+#   3. 适配器实现 MarketDataAdapter 协议并给出 raw_hash
+
+version: 1
+updated: "2026-11-14"
+
+allowed_licenses:
+  - public-market-data      # 公开市场行情
+  - public-disclosure       # 交易所 / 基金公告等公开披露
+  - sample-synthetic        # 脱敏或合成示例数据
+
+sources:
+  - id: miaoxiang
+    name: 东方财富妙想（MCP）
+    license: public-market-data
+    provides: [quotes_weekly, turnover_weekly, pnav, index_series]
+    status: planned          # 适配器尚未接入
+    note: 个券行情、成交、单位净值、流通份额
+
+  - id: exchange
+    name: 上交所 / 深交所公示
+    license: public-disclosure
+    provides: [primary_events, unlock_events, holder_actions]
+    status: planned
+    note: 上市、审核状态、解禁、权益变动
+
+  - id: csindex
+    name: 中证指数公司
+    license: public-disclosure
+    provides: [index_series]
+    status: planned
+    note: 指数点位与日序列
+
+  - id: chinabond
+    name: 中国债券信息网
+    license: public-disclosure
+    provides: [yields]
+    status: planned
+    note: 国债收益率、DR007
+
+  - id: fixture
+    name: 本地示例数据
+    license: public-market-data
+    provides: [quotes_weekly, turnover_weekly, index_series, yields,
+               index_snapshot, primary_events]
+    status: active
+    note: fixtures/<case>/ 下的 CSV，仅含公开行情字段
+
+# 明确禁止的来源类型。出现即阻断，不做人工豁免。
+forbidden:
+  - id: client_private
+    reason: 客户私有数据，不得进入任何输出或提交
+  - id: internal_research
+    reason: 内部未公开研报
+  - id: licensed_nonpublic
+    reason: 付费终端的非公开字段

@@ -38,6 +38,35 @@ class RunConfig:
     max_wall_clock_sec: int = 3600
     max_gate_rounds: int = 2
 
+    @classmethod
+    def from_config(cls, repo_root: Path, case_id: str | None = None) -> "RunConfig":
+        """从 ``config/settings.yaml`` 读取上限与默认周次。
+
+        阈值放在配置里而不是写死在类里：改上限不需要改代码，
+        且每次运行可以把生效值写进 state.json，便于事后核对。
+        """
+        import yaml
+
+        f = Path(repo_root) / "config" / "settings.yaml"
+        raw = yaml.safe_load(f.read_text(encoding="utf-8")) if f.exists() else {}
+        lim = raw.get("limits") or {}
+        d = raw.get("defaults") or {}
+        return cls(
+            repo_root=Path(repo_root),
+            case_id=case_id or d.get("case_id", "demo-2026-W45"),
+            source=d.get("source", "fixture"),
+            week_start=d.get("week_start", "2026-11-02"),
+            week_end=d.get("week_end", "2026-11-06"),
+            week_prev_end=d.get("week_prev_end", "2026-10-30"),
+            info_cutoff=d.get("info_cutoff", "2026-11-08T23:59:59+08:00"),
+            max_wall_clock_sec=int(lim.get("max_wall_clock_sec", 3600)),
+            max_gate_rounds=int(lim.get("max_gate_rounds", 2)),
+        )
+
+    @property
+    def config_dir(self) -> Path:
+        return self.repo_root / "config"
+
     def case_dir(self) -> Path:
         return self.repo_root / "cases" / self.case_id
 
@@ -70,7 +99,7 @@ def run(cfg: RunConfig, state: CaseState | None = None, force: bool = False) -> 
         return (time.time() - t0) < cfg.max_wall_clock_sec
 
     paths = pipeline.CasePaths(cfg.repo_root, cfg.case_id)
-    boards = BoardDictionary.load(cfg.repo_root / "config")
+    boards = BoardDictionary.load(cfg.config_dir)
     week = week_from_dates(_d(cfg.week_start), _d(cfg.week_end), _d(cfg.week_prev_end))
 
     # ---------------------------------------------------------- 1. 取数与计算
@@ -157,7 +186,9 @@ def run(cfg: RunConfig, state: CaseState | None = None, force: bool = False) -> 
 
     # ---------------------------------------------------------- 4. 硬门禁
     results = gates.run_all(
-        sections, result.facts, result.quotes, cfg.info_cutoff, cfg.repo_root
+        sections, result.facts, result.quotes, cfg.info_cutoff, cfg.repo_root,
+        config_dir=str(cfg.config_dir),
+        source_meta=result.source_meta,
     )
     state.gates = {r.id: r.as_dict() for r in results}
     gate_path = case_dir / "qa" / "gates.json"
@@ -181,7 +212,7 @@ def run(cfg: RunConfig, state: CaseState | None = None, force: bool = False) -> 
         state.save(case_dir)
         return state
 
-    state.advance(Stage.HARD_GATES.value, "七条门禁全部通过")
+    state.advance(Stage.HARD_GATES.value, "八条门禁全部通过")
 
     # ---------------------------------------------------------- 4b. Critic
     # 门禁管"对不对"，Critic 管"成不成立"。两者都过才进入人工审批。
@@ -232,6 +263,7 @@ def run(cfg: RunConfig, state: CaseState | None = None, force: bool = False) -> 
     build.build_report(
         result, sections, out_path, paths.charts,
         boards_order=boards.ordered_names(),
+        config_dir=cfg.config_dir,
     )
     state.record_artifact(out_path, Stage.RENDER.value, case_dir)
     state.advance(Stage.RENDER.value, "docx 生成完成")

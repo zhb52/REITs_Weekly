@@ -43,7 +43,7 @@
     <text x="216" y="520" fill="#534AB7">13 节，只用占位符</text>
 
     <rect x="40" y="570" width="300" height="52" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
-    <text x="56" y="592" font-size="13" fill="#04342C">硬门禁 7 条</text>
+    <text x="56" y="592" font-size="13" fill="#04342C">硬门禁 8 条</text>
     <text x="56" y="610" fill="#0F6E56">数字回溯 · 勾稽 · 量级 · 板块一致 · 时效 · 结构 · 凭证</text>
 
     <rect x="40" y="660" width="300" height="52" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>

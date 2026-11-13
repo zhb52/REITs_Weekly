@@ -1,0 +1,36 @@
+# 运行参数
+#
+# 之前这些上限硬编码在 controller.RunConfig 的默认值里，改阈值要改代码。
+# 现在由 RunConfig.from_config() 读取，且每次运行都把实际生效的值写进
+# state.json，便于事后核对"这一期是在什么限制下跑出来的"。
+
+version: 1
+updated: "2026-11-14"
+
+limits:
+  max_wall_clock_sec: 3600     # 单次运行墙钟上限
+  max_stage_sec: 600           # 单阶段上限
+  max_gate_rounds: 2           # 门禁 / Critic 连续未通过的最大轮次，超出转 ESCALATED
+  max_llm_cost_usd: 3.0        # 单期模型成本上限
+  max_tool_calls: 300          # 单期工具调用上限
+  adapter_timeout_sec: 30      # 单次适配器请求超时
+
+retry:
+  network_backoff_sec: [5, 20, 60]   # 指数退避，长度即最大重试次数
+  on_schema_drift: block             # schema 漂移不重试，直接 BLOCKED
+  on_parse_error: block              # 解析失败不猜测，转 BLOCKED
+
+budget_guard:
+  # 耗尽配额永远不等于通过。触达上限时的处理：
+  on_exhausted: escalate
+  note: >-
+    门禁或 Critic 的轮次用尽时转 ESCALATED，由人决定是放宽标准还是改数据；
+    不得自动降级为通过。这是全项目最不愿妥协的一条。
+
+defaults:
+  case_id: demo-2026-W45
+  source: fixture
+  week_start: "2026-11-02"
+  week_end: "2026-11-06"
+  week_prev_end: "2026-10-30"
+  info_cutoff: "2026-11-08T23:59:59+08:00"

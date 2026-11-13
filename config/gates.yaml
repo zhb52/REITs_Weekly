@@ -1,0 +1,65 @@
+# 门禁阈值与白名单
+#
+# 之前数字审计的允许模式（期限名称、指数名、章节号）和量级阈值都硬编码在
+# verify/gates.py 里。把它们提出来有两个好处：
+#   1. 新增允许模式需要走配置变更，会在 git 历史里留痕
+#   2. 阈值调整不需要改代码，也就不会顺手改动校验逻辑本身
+#
+# 注意：允许模式只能因为"这类数字确实不是数据"而添加，
+# 不能因为"加了就能过"而添加。每条都要写理由。
+
+version: 1
+updated: "2026-11-14"
+
+numeric_audit:
+  # 正文中允许出现的非事实数字
+  allowed_patterns:
+    # YAML 单引号内反斜杠是字面量，因此这里写单反斜杠即得正则所需的转义
+    - pattern: '\d+年期'
+      reason: 期限名称，如 10年期国债
+    - pattern: 'DR007'
+      reason: 资金利率品种代码
+    - pattern: '\d{4}[-./年]\d{1,2}[-./月]\d{1,2}'
+      reason: 日期
+    - pattern: '\d{4}年'
+      reason: 年份
+    - pattern: '第[一二三四五六七八九十]'
+      reason: 序数，中文数字
+    - pattern: '沪深\s*300'
+      reason: 指数名称中的数字
+    - pattern: '中证\s*\d+'
+      reason: 指数名称中的数字
+    - pattern: '\d+\.\d+\s*节'
+      reason: 章节交叉引用
+
+unit_sanity:
+  # 数值合理区间，超出即判为疑似单位错误
+  ranges:
+    market.eq_return: [-30, 30]
+    board.eq_return: [-40, 40]
+    turnover.rate: [0, 50]
+    pnav.median: [0.05, 10]
+
+crossfoot:
+  tolerance_yi: 0.02        # 成交额合计与分项之和的容差（亿元）
+
+structure:
+  required_sections: ["0.1", "0.2", "0.3", "1.1", "1.2", "1.3",
+                      "1.4", "1.5", "2.1", "2.2", "2.3", "2.4", "2.5", "risk"]
+  data_gap_markers: ["数据缺口", "尚未接入"]
+  risk_notice_allowed_in: ["risk"]   # 风险提示只允许出现在文末章节
+
+secret_scan:
+  # 扫描时跳过的目录（这些目录里的内容不进提交包）
+  skip_dirs: [".git", ".venv", "__pycache__", ".pytest_cache", "node_modules"]
+  # 视为文本、需要扫描的扩展名
+  text_ext: [".py", ".md", ".yaml", ".yml", ".json", ".csv", ".txt",
+             ".ps1", ".sh", ".toml"]
+  # 允许的最大单文件扫描体积
+  max_bytes: 2000000
+
+critic:
+  pass_score: 3.5            # 全篇均分通过线
+  section_floor: 3.0         # 单节最低分，低于即判 revise
+  min_section_chars: 60      # 低于此字数直接判不通过
+  judgment_sections: ["0.1", "0.2", "0.3", "2.5"]   # 需交代与上期关系的章节

@@ -41,7 +41,7 @@ cases/<case>/
 ├─ facts/facts.json          本期全部数字及其来源、公式、适用章节
 ├─ drafts/drafts.md          草稿源文件（含占位符，可直接改）
 ├─ drafts/composed.json      占位符替换后的成稿文本
-├─ qa/gates.json             七条门禁的检查结果与失败样本
+├─ qa/gates.json             八条门禁的检查结果与失败样本
 ├─ work/quotes_normalized.csv  归一化后的个券表
 ├─ work/provenance.json      数据溯源与板块差异
 ├─ work/charts/*.png         四张图
@@ -76,7 +76,7 @@ cases/<case>/
 
 1. 改 `config/boards.yaml` 或 `compute/` 下的公式
 2. 同步更新 `docs/metrics.md` 与 `CHANGELOG.md`
-3. 重跑并对比 `tests/golden/`：`pytest -q`。若关键数值变化是预期的，
+3. 重跑并对比基线 `tests/golden/baseline_2026-W45.json`：`pytest -q`。若关键数值变化是预期的，
    更新基线文件并在 `CHANGELOG.md` 写明理由与影响范围
 4. 历史 `cases/` 不受影响——每期产物独立，不做回溯重算
 

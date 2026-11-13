@@ -43,7 +43,7 @@
 | `src/reits_weekly/` | 主程序，见下方模块说明 |
 | `cases/demo-2026-W45/` | 一期完整产物：事实库、草稿、门禁结果、成品 docx、状态机 |
 | `fixtures/demo-2026-W45/` | 可分享的示例输入（公开行情）与期望输出 |
-| `tests/` | 88 项测试，含门禁、Critic、状态机与中断恢复的用例 |
+| `tests/` | 104 项测试，含门禁、Critic、状态机、中断恢复与固定基线 |
 | `scripts/` | 环境引导、示例数据生成、指数序列提取、提交打包 |
 
 ### 源码结构
@@ -56,7 +56,7 @@ src/reits_weekly/
 ├─ facts.py      事实库：fact_id 派生、display 定型
 ├─ draft/        占位符解析（{{M:metric|param}}）
 ├─ render/       图表、五张表、docx 装配
-├─ verify/       七条硬门禁
+├─ verify/       八条硬门禁
 ├─ state.py      状态机、检查点、审批记录
 ├─ controller.py 阶段推进、重试、阻断、升级
 └─ cli.py        命令行入口
@@ -79,7 +79,7 @@ powershell -ExecutionPolicy Bypass -File scripts/bootstrap_venv.ps1
 python -m venv .venv
 ./.venv/Scripts/python.exe -m pip install -r requirements.in
 ./.venv/Scripts/python.exe -m pip install -e .
-./.venv/Scripts/python.exe -m pytest -q      # 88 passed
+./.venv/Scripts/python.exe -m pytest -q      # 104 passed
 ```
 
 ### 跑一期

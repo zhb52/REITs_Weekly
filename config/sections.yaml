@@ -1,0 +1,110 @@
+# 报告结构 —— 章节与块的装配顺序
+#
+# 之前这份结构硬编码在 render/build.py 的 OUTLINE 里，改章节要改代码。
+# 现在移到这里：增删章节、调整表图位置都不需要动 Python。
+#
+# blocks 里每一项对应 render/build.py 中 _BLOCKS 注册表的一个键。
+# 顺序即渲染顺序。
+
+version: 1
+updated: "2026-11-14"
+
+chapters:
+  - level: chapter
+    id: abs
+    title: 摘要：本周判断与配置关注
+    blocks: []
+
+  - level: section
+    id: "0.1"
+    title: 0.1 市场核心判断
+    blocks: []
+
+  - level: section
+    id: "0.2"
+    title: 0.2 基本面与定价判断
+    blocks: []
+
+  - level: section
+    id: "0.3"
+    title: 0.3 配置关注与观点变化
+    blocks: []
+
+  - level: chapter
+    id: ch1
+    title: 第一章 市场表现——整体收益、板块分化与交易变化
+    blocks: []
+
+  - level: section
+    id: "1.1"
+    title: 1.1 整体收益与跨资产表现
+    blocks: [index_table_reits, chart_reits_index, index_table_cross, chart_cross_asset]
+
+  - level: section
+    id: "1.2"
+    title: 1.2 板块表现与市场全景
+    # 本节只有表格，无正文。body: false 表示不渲染正文段落
+    body: false
+    blocks: [quotes_table]
+
+  - level: section
+    id: "1.3"
+    title: 1.3 个券表现与异常识别
+    blocks: []
+
+  - level: section
+    id: "1.4"
+    title: 1.4 成交活跃度与流动性
+    blocks: [chart_board_turnover, chart_board_turnover_rate]
+
+  - level: section
+    id: "1.5"
+    title: 1.5 折溢价变化
+    blocks: [pnav_table]
+
+  - level: chapter
+    id: ch2
+    title: 第二章 定价环境——利率变化与近期供需安排
+    blocks: []
+
+  - level: section
+    id: "2.1"
+    title: 2.1 利率与资金价格
+    blocks: []
+
+  - level: section
+    id: "2.2"
+    title: 2.2 首发与扩募供给安排
+    blocks: [pending_table]
+
+  - level: section
+    id: "2.3"
+    title: 2.3 解禁与份额变化
+    blocks: []
+
+  - level: section
+    id: "2.4"
+    title: 2.4 已披露的持有人行为
+    blocks: []
+
+  - level: section
+    id: "2.5"
+    title: 2.5 外部条件的综合判断
+    blocks: []
+
+  - level: chapter
+    id: risk
+    title: 风险提示
+    blocks: []
+
+# 资料来源标注，按块类型配置，避免散落在代码里
+source_notes:
+  index_table_reits: "Choice"
+  chart_reits_index: "Choice；指数以 2021-09-30 为基期 1000"
+  index_table_cross: "Choice"
+  chart_cross_asset: "Choice；指数以 2021-09-30 为基期 1000"
+  quotes_table: "Choice；收盘价为前复权价格口径"
+  pnav_table: "Choice"
+  pending_table: "上交所、深交所 REITs 项目动态"
+  chart_board_turnover: "Choice"
+  chart_board_turnover_rate: "Choice"

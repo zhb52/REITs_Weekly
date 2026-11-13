@@ -52,8 +52,16 @@
   {
     "id": "G-SRC-01",
     "ok": true,
-    "detail": "扫描 83 个文本文件，未发现凭证",
-    "checked": 83,
+    "detail": "扫描 96 个文本文件，未发现凭证",
+    "checked": 96,
+    "failed": 0,
+    "samples": []
+  },
+  {
+    "id": "G-SRC-02",
+    "ok": true,
+    "detail": "数据源 license='public-market-data' 已登记",
+    "checked": 0,
     "failed": 0,
     "samples": []
   }
