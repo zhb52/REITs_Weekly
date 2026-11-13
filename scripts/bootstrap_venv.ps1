@@ -1,4 +1,4 @@
-# 在项目内建立虚拟环境并安装依赖，不污染系统 Python
+﻿# 在项目内建立虚拟环境并安装依赖，不污染系统 Python
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
 Push-Location $root

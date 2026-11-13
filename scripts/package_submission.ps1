@@ -1,4 +1,4 @@
-# 提交打包：生成 studentID-final-project.zip，包含完整 .git 历史
+﻿# 提交打包：生成 studentID-final-project.zip，包含完整 .git 历史
 #
 # 为什么不用 Compress-Archive：它在部分 PowerShell 版本下会跳过以点开头的
 # 隐藏目录（.git、.github），导致提交包里没有历史，而作业明确要求必须包含。
@@ -11,12 +11,48 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$StudentId,
 
-    [string]$SourceDir = (Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)),
-    [string]$OutDir    = (Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path))
+    [string]$SourceDir = '',
+    [string]$OutDir    = ''
 )
 
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.IO.Compression.FileSystem
+
+# 默认路径取自脚本自身位置。$PSScriptRoot 在 -File 方式下可靠，
+# 而 $MyInvocation.MyCommand.Path 在参数默认值里可能为空。
+if ([string]::IsNullOrWhiteSpace($SourceDir)) {
+    $SourceDir = Split-Path -Parent $PSScriptRoot
+}
+if ([string]::IsNullOrWhiteSpace($OutDir)) {
+    $OutDir = Split-Path -Parent $PSScriptRoot
+}
+
+# 定位 git。PowerShell 的 PATH 里不一定有 git（Git Bash 才带），
+# 因此优先 Get-Command，失败再按常见安装位置探测。
+function Resolve-Git {
+    $cmd = Get-Command git -ErrorAction SilentlyContinue
+    if ($cmd) { return $cmd.Source }
+
+    $candidates = @(
+        (Join-Path $env:ProgramFiles 'Git\cmd\git.exe'),
+        (Join-Path ${env:ProgramFiles(x86)} 'Git\cmd\git.exe'),
+        (Join-Path $env:LOCALAPPDATA 'Programs\Git\cmd\git.exe')
+    )
+    # WorkBuddy 自带的 PortableGit
+    $portable = Join-Path $env:USERPROFILE '.workbuddy\binaries\PortableGit\versions'
+    if (Test-Path $portable) {
+        Get-ChildItem $portable -Directory | ForEach-Object {
+            $candidates += (Join-Path $_.FullName 'cmd\git.exe')
+        }
+    }
+    foreach ($c in $candidates) {
+        if ($c -and (Test-Path $c)) { return $c }
+    }
+    throw ' 找不到 git，请安装 Git for Windows 或将其加入 PATH'
+}
+
+$Git = Resolve-Git
+Write-Host "使用 git: $Git"
 
 $zipPath = Join-Path $OutDir "$StudentId-final-project.zip"
 
@@ -27,16 +63,16 @@ if (-not (Test-Path (Join-Path $SourceDir '.git'))) {
 
 Push-Location $SourceDir
 try {
-    $dirty = git status --porcelain
+    $dirty = & $Git status --porcelain
     if ($dirty) {
         Write-Warning "工作区有未提交的改动，先提交再打包："
         $dirty | ForEach-Object { Write-Host "  $_" }
         throw "请先 git add -A; git commit 后再运行本脚本"
     }
 
-    $head = git rev-parse --short HEAD
-    $count = git rev-list --count HEAD
-    $shallow = git rev-parse --is-shallow-repository
+    $head = & $Git rev-parse --short HEAD
+    $count = & $Git rev-list --count HEAD
+    $shallow = & $Git rev-parse --is-shallow-repository
     Write-Host "提交 $count 条，HEAD=$head，浅克隆=$shallow"
     if ($shallow -eq 'true') {
         throw "当前是浅克隆，作业不接受。请先 git fetch --unshallow"
