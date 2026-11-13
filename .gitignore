@@ -1,0 +1,28 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Secrets — never commit
+.env
+.env.*
+!.env.example
+
+# Runtime scratch
+*.tmp
+*.log
+cases/*/work/
+!cases/*/work/.gitkeep
+
+# OS / editor
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+.idea/
+
+# Large generated binaries kept out of history
+fixtures/*/raw/

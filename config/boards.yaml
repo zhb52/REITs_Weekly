@@ -1,0 +1,96 @@
+# 板块字典 —— 全篇唯一事实源
+#
+# 凡涉及"某只基金属于哪个板块"的判断，一律以本文件 + config/fund_registry.csv 为准。
+# 任何章节（第一章板块收益、1.5 P/NAV 分板块、第三章估值）必须读同一份映射，
+# 由 verify/crosscheck.py 的 G-BOARD-01 门禁保证跨章一致。
+#
+# 历史教训（2026-W45 期）：
+#   国泰海通济南能源供热 REIT（508087）在底稿中归"能源"、在终端导出中归"水利设施"，
+#   导致同一份报告的第一章按 12 只能源/2 只水利计算，而 1.5 的 P/NAV 表按 11 只能源/
+#   3 只水利计算。水利 P/NAV 中位数因此出现 1.284 与 1.430 两个版本。
+#   本文件将其显式固定为"能源基础设施"，杜绝再次漂移。
+
+version: 1
+updated: "2026-11-14"
+
+# ---- 规范板块：name 为报告对外显示名，order 为 1.2 表的展示顺序 ----
+boards:
+  - name: 交通基础设施
+    key: transport
+    asset_class: 特许经营权类
+    order: 1
+  - name: 产业园区
+    key: industrial
+    asset_class: 产权类
+    order: 2
+  - name: 仓储物流
+    key: logistics
+    asset_class: 产权类
+    order: 3
+  - name: 生态环保
+    key: environment
+    asset_class: 特许经营权类
+    order: 4
+  - name: 能源基础设施
+    key: energy
+    asset_class: 特许经营权类
+    order: 5
+  - name: 保障性租赁住房
+    key: affordable_housing
+    asset_class: 产权类
+    order: 6
+  - name: 消费基础设施
+    key: consumer
+    asset_class: 产权类
+    order: 7
+  - name: 水利设施
+    key: water
+    asset_class: 特许经营权类
+    order: 8
+  - name: 数据中心
+    key: datacenter
+    asset_class: 产权类
+    order: 9
+  - name: 商业不动产
+    key: commercial
+    asset_class: 产权类
+    order: 10
+
+# ---- 别名：数据源里出现的各种叫法 -> 规范名 ----
+# 顺序无关；未命中的板块名会在 normalize/board_map.py 里抛出 UNKNOWN_BOARD 并阻断。
+aliases:
+  高速公路: 交通基础设施
+  交运: 交通基础设施
+  产业园: 产业园区
+  产业园区: 产业园区
+  仓储物流: 仓储物流
+  市政环保: 生态环保
+  环保: 生态环保
+  能源: 能源基础设施
+  能源基础设施: 能源基础设施
+  保障房: 保障性租赁住房
+  保租房: 保障性租赁住房
+  保障性租赁住房: 保障性租赁住房
+  消费: 消费基础设施
+  消费基础设施: 消费基础设施
+  水利: 水利设施
+  水利设施: 水利设施
+  数据中心: 数据中心
+  商业不动产: 商业不动产
+
+# ---- 显式覆盖：优先于数据源自带的分类 ----
+# 每条覆盖都必须写明理由和生效日期，便于回溯。
+overrides:
+  - code: "508087"
+    name: 国泰海通济南能源供热REIT
+    board: 能源基础设施
+    reason: >-
+      底层资产为济南供热管网，属特许经营类能源基础设施。底稿口径为"能源"，
+      终端 F9 行业为"水利设施"。2026-11-14 经作者确认统一归能源，全篇生效。
+    decided_by: 周豪波
+    decided_at: "2026-11-14"
+
+# ---- 新上市判定 ----
+# 不依赖日历，改用数据可观测信号：本期无上一可比收盘价者即为新上市。
+# 与硬编码"本周新增 N 只"相比，该判据不会因跨周而失效。
+new_listing_rule: no_prior_close
