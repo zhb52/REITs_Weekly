@@ -134,9 +134,16 @@ def test_pit_passes_when_within_cutoff():
 # ------------------------------------------------------------------ 凭据
 
 
+def _fake_token() -> str:
+    """运行时拼接，避免测试文件本身被扫描器命中（否则是自指误报）。
+
+    不能靠"扫描时跳过 tests/"来绕过 —— 那样一旦测试里混入真实凭证就漏检了。
+    """
+    return "sk-" + "a1b2c3d4e5f6g7h8i9j0"
+
+
 def test_secret_scan_catches_token(tmp_path):
-    (tmp_path / "cfg.py").write_text('api_key = "sk-abcdefghijklmnopqrstuvwxyz123456"',
-                                     encoding="utf-8")
+    (tmp_path / "cfg.py").write_text(f'api_key = "{_fake_token()}"', encoding="utf-8")
     r = gates.secret_scan(tmp_path)
     assert not r.ok
 
@@ -149,8 +156,7 @@ def test_secret_scan_ignores_clean_files(tmp_path):
 def test_secret_scan_skips_venv(tmp_path):
     venv = tmp_path / ".venv" / "lib"
     venv.mkdir(parents=True)
-    (venv / "leak.py").write_text('api_key = "sk-abcdefghijklmnopqrstuvwxyz123456"',
-                                  encoding="utf-8")
+    (venv / "leak.py").write_text(f'api_key = "{_fake_token()}"', encoding="utf-8")
     assert gates.secret_scan(tmp_path).ok
 
 
