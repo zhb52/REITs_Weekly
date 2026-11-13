@@ -30,3 +30,6 @@ fixtures/*/raw/
 # 生成产物（体积大，保留 facts/qa/state，out 中的 docx 由 CI 重建）
 cases/*/out/*.docx
 cases/*/work/charts/*.png
+
+# 提交包本身不入库（否则会自我嵌套、体积翻倍）
+*-final-project.zip
