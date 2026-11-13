@@ -121,9 +121,11 @@ finally {
 # ---- 验证 --------------------------------------------------------------
 $zip = [System.IO.Compression.ZipFile]::OpenRead($zipPath)
 try {
-    $names = $zip.Entries | ForEach-Object { $_.FullName }
-    $hasGitHead  = $names -contains '.git/HEAD'
-    $hasGitObjs  = ($names | Where-Object { $_ -like '.git/objects/*' }).Count -gt 0
+    # 统一分隔符后再比对：不同 .NET 版本写入 zip 的分隔符可能不同，
+    # 直接用 -contains '.git/HEAD' 会因反斜杠而误判为缺失。
+    $names = $zip.Entries | ForEach-Object { ($_.FullName -replace '\\', '/') }
+    $hasGitHead  = @($names | Where-Object { $_ -eq '.git/HEAD' }).Count -gt 0
+    $hasGitObjs  = @($names | Where-Object { $_ -like '.git/objects/*' }).Count -gt 0
     $hasGit      = $hasGitHead -and $hasGitObjs
     $fileCount   = $names.Count
 }
