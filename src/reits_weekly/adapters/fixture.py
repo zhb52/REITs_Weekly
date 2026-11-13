@@ -46,6 +46,7 @@ class FixtureAdapter(MarketDataAdapter):
         self._turnover = self._read("turnover_weekly.csv")
         self._yields = self._read("yields.csv")
         self._index = self._read("index_series.csv")
+        self._snapshot = self._read("index_snapshot.csv")
 
         self.meta = SourceMeta(
             source_id=f"fixture:{case_id}",
@@ -120,6 +121,15 @@ class FixtureAdapter(MarketDataAdapter):
         return df[["date", "series", "value_rebased"]].rename(
             columns={"date": "trade_date", "series": "code", "value_rebased": "close"}
         )
+
+    def index_snapshot(self) -> pd.DataFrame:
+        """当期指数点位表（1.1 的表格用），与历史序列分开存放。"""
+        if self._snapshot.empty:
+            raise CapabilityNotAvailable("index_snapshot")
+        df = self._snapshot.copy()
+        for c in ("close", "wow_pct", "ytd_pct"):
+            df[c] = pd.to_numeric(df[c], errors="coerce")
+        return df
 
     def health(self) -> SourceHealth:
         return SourceHealth(

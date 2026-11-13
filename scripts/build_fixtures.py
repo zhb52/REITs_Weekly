@@ -134,7 +134,7 @@ def build(ledger: Path, market: Path, out_dir: Path) -> None:
     quotes["dpu_week"] = quotes["dpu_week"].fillna(0.0)
 
     quotes = quotes[[
-        "code", "name", "board_raw", "asset_class",
+        "code", "name", "board_raw", "asset_class", "listing_date",
         "close_prev", "close_cur", "dpu_week",
         "mktcap_total", "mktcap_float", "issue_price", "pnav",
     ]].sort_values("code")

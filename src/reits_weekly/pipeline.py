@@ -119,9 +119,15 @@ def prepare(
     except Exception:
         index_df = pd.DataFrame()
 
+    try:
+        snapshot = adapter.index_snapshot()
+    except Exception:
+        snapshot = pd.DataFrame()
+
     facts = build_facts(
         quotes, turnover, week, case_id,
         adapter.meta.raw_hash, boards, adapter.meta.as_dict(),
+        index_snapshot=snapshot,
     )
 
     return CaseResult(

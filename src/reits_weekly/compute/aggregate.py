@@ -25,6 +25,7 @@ def build_facts(
     input_hash: str,
     boards: BoardDictionary,
     source_meta: dict | None = None,
+    index_snapshot: pd.DataFrame | None = None,
 ) -> FactsBundle:
     """计算并登记全部事实。
 
@@ -42,6 +43,20 @@ def build_facts(
     q = quotes.copy()
     if _returns.RETURN_COL not in q.columns:
         q = _returns.attach_returns(q)
+
+    # ---------------------------------------------------------- 指数当期值
+    if index_snapshot is not None and len(index_snapshot):
+        for _, row in index_snapshot.iterrows():
+            code = str(row["code"])
+            bundle.add("index.close", float(row["close"]), unit="", decimals=2,
+                       formula="index_snapshot(close)", params={"code": code},
+                       source=src, section_hint=["1.1"])
+            bundle.add("index.wow", float(row["wow_pct"]), unit="%", decimals=2,
+                       formula="index_snapshot(wow_pct)", params={"code": code},
+                       source=src, section_hint=["1.1"])
+            bundle.add("index.ytd", float(row["ytd_pct"]), unit="%", decimals=2,
+                       formula="index_snapshot(ytd_pct)", params={"code": code},
+                       source=src, section_hint=["1.1"])
 
     # ---------------------------------------------------------- 市场广度
     b = _boards.breadth(q)
