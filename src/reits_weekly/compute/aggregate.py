@@ -26,6 +26,7 @@ def build_facts(
     boards: BoardDictionary,
     source_meta: dict | None = None,
     index_snapshot: pd.DataFrame | None = None,
+    yields: pd.DataFrame | None = None,
 ) -> FactsBundle:
     """计算并登记全部事实。
 
@@ -72,6 +73,47 @@ def build_facts(
                source=src, section_hint=["0.1", "1.3"])
     bundle.add("market.median_return", b.median, unit="%", formula="median(ret_total)",
                source=src, section_hint=["0.1", "1.3"])
+
+    # ---------------------------------------------------------- 涨跌幅榜首
+    valid = q[q[_returns.RETURN_COL].notna()]
+    if len(valid):
+        top = valid.loc[valid[_returns.RETURN_COL].idxmax()]
+        bot = valid.loc[valid[_returns.RETURN_COL].idxmin()]
+        for tag, row in (("top", top), ("bottom", bot)):
+            bundle.add(f"mover.{tag}_name", str(row["name"]), unit="",
+                       formula=f"arg{'max' if tag == 'top' else 'min'}(ret_total)",
+                       params={"case": case_id}, source=src, section_hint=["1.3"])
+            bundle.add(f"mover.{tag}_value", float(row[_returns.RETURN_COL]), unit="%",
+                       formula=f"arg{'max' if tag == 'top' else 'min'}(ret_total)",
+                       params={"case": case_id}, source=src, section_hint=["1.3"])
+
+    # ---------------------------------------------------------- 个券明细
+    # 正文要能点名引用具体个券（"某某REIT下跌 X%"），故为每只可比标的
+    # 登记名称与收益。数字仍只能通过 {{M:fund.ret|code=xxxxxx}} 引用，
+    # 不允许手写 —— 这样审计才能保证正文数字全部可回溯。
+    for _, row in q.iterrows():
+        if pd.isna(row[_returns.RETURN_COL]):
+            continue
+        code = str(row["code"])
+        bundle.add("fund.name", str(row["name"]), unit="",
+                   formula="registry(name)", params={"code": code},
+                   source=src, section_hint=["1.3"])
+        bundle.add("fund.ret", float(row[_returns.RETURN_COL]), unit="%",
+                   formula="weekly_total_return", params={"code": code},
+                   source=src, section_hint=["1.3"])
+
+    # ---------------------------------------------------------- 利率
+    if yields is not None and len(yields):
+        for _, row in yields.iterrows():
+            code = str(row["code"])
+            prev = float(row["prev"])
+            cur = float(row["cur"])
+            bundle.add("yield.level", cur, unit="%no_sign", decimals=3,
+                       formula="yield(cur)", params={"code": code},
+                       source=src, section_hint=["2.1"])
+            bundle.add("yield.chg_bp", (cur - prev) * 100.0, unit="bp", decimals=1,
+                       formula="(cur-prev)*100", params={"code": code},
+                       source=src, section_hint=["2.1"])
 
     # ---------------------------------------------------------- 板块收益
     agg = _boards.board_aggregate(q, weight_col="mktcap_float")

@@ -49,7 +49,12 @@ def make_fact_id(metric: str, params: dict, case_id: str, input_hash: str) -> st
 
 
 def format_value(value: Any, unit: str, decimals: int) -> str:
-    """按单位选择格式化函数，保证表、文、事实库一致。"""
+    """按单位选择格式化函数，保证表、文、事实库一致。
+
+    字符串型事实（如基金名称、板块名）原样输出，不走数字格式化。
+    """
+    if isinstance(value, str):
+        return value
     if is_missing(value):
         from .formatting import DASH
 

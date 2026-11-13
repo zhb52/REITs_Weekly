@@ -124,10 +124,16 @@ def prepare(
     except Exception:
         snapshot = pd.DataFrame()
 
+    try:
+        yields_df = adapter.yields(["T10Y", "T30Y", "DR007"], week.prev_end, week.end)
+    except Exception:
+        yields_df = pd.DataFrame()
+
     facts = build_facts(
         quotes, turnover, week, case_id,
         adapter.meta.raw_hash, boards, adapter.meta.as_dict(),
         index_snapshot=snapshot,
+        yields=yields_df,
     )
 
     return CaseResult(
