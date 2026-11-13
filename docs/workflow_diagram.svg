@@ -109,8 +109,8 @@
   <g font-size="10" fill="#5F5E5A">
     <text x="352" y="262">未登记板块名 → 报错，不静默兜底</text>
     <text x="352" y="342">数字只在这里产生</text>
-    <text x="352" y="418">正文引用 display，不写裸数字</text>
+    <text x="352" y="418">正文只引 display</text>
     <text x="352" y="606">G-NUM-01 … G-SRC-01</text>
-    <text x="352" y="696">停在审批节点，不自动出稿</text>
+    <text x="352" y="696">停在审批节点</text>
   </g>
 </svg>
