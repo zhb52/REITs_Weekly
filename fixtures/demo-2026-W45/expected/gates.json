@@ -1,0 +1,68 @@
+[
+  {
+    "id": "G-NUM-01",
+    "ok": true,
+    "detail": "0/134 个数字无法回溯到事实库",
+    "checked": 134,
+    "failed": 0,
+    "samples": []
+  },
+  {
+    "id": "G-NUM-02",
+    "ok": true,
+    "detail": "全部勾稽通过",
+    "checked": 0,
+    "failed": 0,
+    "samples": []
+  },
+  {
+    "id": "G-UNIT-01",
+    "ok": true,
+    "detail": "单位与量级正常",
+    "checked": 0,
+    "failed": 0,
+    "samples": []
+  },
+  {
+    "id": "G-BOARD-01",
+    "ok": true,
+    "detail": "每个代码仅一个板块",
+    "checked": 0,
+    "failed": 0,
+    "samples": []
+  },
+  {
+    "id": "G-PIT-01",
+    "ok": true,
+    "detail": "全部事实早于或等于 2026-11-08",
+    "checked": 0,
+    "failed": 0,
+    "samples": []
+  },
+  {
+    "id": "G-STYLE-01",
+    "ok": true,
+    "detail": "结构完整；0 节标注数据缺口",
+    "checked": 0,
+    "failed": 0,
+    "samples": [
+      "数据缺口节: []"
+    ]
+  },
+  {
+    "id": "G-SRC-01",
+    "ok": true,
+    "detail": "扫描 97 个文本文件，未发现凭证",
+    "checked": 97,
+    "failed": 0,
+    "samples": []
+  },
+  {
+    "id": "G-SRC-02",
+    "ok": true,
+    "detail": "数据源 license='public-market-data' 已登记",
+    "checked": 0,
+    "failed": 0,
+    "samples": []
+  }
+]
