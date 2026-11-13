@@ -8,21 +8,21 @@
 ## 1. 建立基线
 
 ```
-tag baseline-v0.1.0 -> 4646b83
+tag baseline-v0.1.0 -> ffde04a
 ```
 
-基线提交：`4646b83`
+基线提交：`ffde04a`
 
 ## 2. 基线测试（改动前）
 
 ```
-82 passed in 1.25s
+82 passed in 1.12s
 ```
 退出码 0（0 = 通过）
 
 ## 3. 提交一处口径改动：TR-01 少除交易日数
 
-改动提交：`e25ac02`
+改动提交：`1b3dcfe`
 
 ## 4. 对基线跑测试
 
@@ -32,7 +32,7 @@ tests\unit\test_liquidity.py:46: AssertionError
 =========================== short test summary info ===========================
 FAILED tests/unit/test_liquidity.py::test_tr01_basic - assert 1.633 == 0.327
 FAILED tests/unit/test_liquidity.py::test_real_turnover_matches_report - asse...
-2 failed, 80 passed in 1.15s
+2 failed, 80 passed in 1.07s
 ```
 退出码 1（非 0 = 被拦下）
 
@@ -41,22 +41,22 @@ FAILED tests/unit/test_liquidity.py::test_real_turnover_matches_report - asse...
 ## 5. 回滚到基线
 
 ```
-HEAD is now at 4646b83 chore: add prompts, skills and evidence scripts
+HEAD is now at ffde04a chore: add prompts, skills and evidence scripts
 ```
 
 回滚后重跑测试：
 ```
-..........                                                               [100%][safe-delete][SAFE_DELETE_BULK_CONFIRM_REQUIRED] {"count":183,"threshold":50,"scope":"turn","targets":["\\\\?\\C:\\Users\\Zzhou\\AppData\\Local\\Temp\\pytest-of-Zzhou\\garbage-ba750c5d-eb2c-4367-b684-67d200cc2777"],"targetCount":1}
+82 passed in 0.99s
 ```
-退出码 1（0 = 已恢复）
+退出码 0（0 = 已恢复）
 
 ## 结论
 
 | 环节 | 结果 |
 |---|---|
 | 改动被基线拦下 | 是 |
-| 回滚后恢复通过 | 否 |
-| 主仓库未受影响 | 是（全程在临时克隆 `reits-rollback-0zmey3ni` 中进行） |
+| 回滚后恢复通过 | 是 |
+| 主仓库未受影响 | 是（全程在临时克隆 `reits-rollback-ooahrnf8` 中进行） |
 
 ## 这个机制保护的是什么
 

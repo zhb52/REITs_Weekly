@@ -36,12 +36,14 @@
 | `docs/metrics.md` | 九类指标的定义、公式与口径陷阱 |
 | `docs/data_contract.md` | 适配器必须满足的字段契约与溯源要求 |
 | `docs/runbook.md` | 每周操作流程、中断处理、口径变更步骤 |
+| `docs/requirement_checklist.md` | **作业要求逐条对照（含证据路径）** |
+| `docs/verification_evidence/` | 验证汇总、中断恢复实录、回滚实录 |
 | `config/boards.yaml` | 板块字典（10 个板块、别名、显式覆盖、冲突记录） |
 | `config/fund_registry.csv` | 96 只基金的板块与属性登记表 |
 | `src/reits_weekly/` | 主程序，见下方模块说明 |
 | `cases/demo-2026-W45/` | 一期完整产物：事实库、草稿、门禁结果、成品 docx、状态机 |
 | `fixtures/demo-2026-W45/` | 可分享的示例输入（公开行情）与期望输出 |
-| `tests/` | 82 项测试，含门禁、Critic 与状态机的用例 |
+| `tests/` | 88 项测试，含门禁、Critic、状态机与中断恢复的用例 |
 | `scripts/` | 环境引导、示例数据生成、指数序列提取、提交打包 |
 
 ### 源码结构
@@ -77,7 +79,7 @@ powershell -ExecutionPolicy Bypass -File scripts/bootstrap_venv.ps1
 python -m venv .venv
 ./.venv/Scripts/python.exe -m pip install -r requirements.in
 ./.venv/Scripts/python.exe -m pip install -e .
-./.venv/Scripts/python.exe -m pytest -q      # 82 passed
+./.venv/Scripts/python.exe -m pytest -q      # 88 passed
 ```
 
 ### 跑一期
