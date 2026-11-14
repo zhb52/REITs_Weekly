@@ -101,10 +101,15 @@ class FactsBundle:
         case_id: str,
         input_hash: str,
         facts: Iterable[Fact] | None = None,
+        run_meta: dict | None = None,
     ) -> None:
         self.case_id = case_id
         self.input_hash = input_hash
         self._facts: dict[str, Fact] = {f.id: f for f in (facts or [])}
+        # 抓取时刻不写进 facts.json —— 它属于运行过程，记在 provenance.json
+        # 与 state.json 里。facts.json 只放分析内容，这样同一输入重跑时
+        # 该文件逐字节一致，"产物可复现"才能在文件层面被验证。
+        self.run_meta = run_meta or {}
 
     # ------------------------------------------------------------ 写入
 

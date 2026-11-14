@@ -40,7 +40,11 @@ def build_facts(
     case_id, input_hash : 决定 fact_id 的两个要素。
     boards : 板块字典，用于排序与属性查表。
     """
-    src = source_meta or {}
+    # 抓取时刻属于整次运行，不属于单条事实。放进 run_meta，
+    # 逐条 source 只保留来源标识、数据时点与许可 —— 这样同一输入重跑，
+    # facts.json 逐字节一致，"产物可复现"才能在文件层面被验证。
+    src = dict(source_meta or {})
+    _retrieved_at = src.pop("retrieved_at", None)
     bundle = FactsBundle(case_id=case_id, input_hash=input_hash)
 
     q = quotes.copy()

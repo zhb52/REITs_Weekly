@@ -52,8 +52,8 @@
   {
     "id": "G-SRC-01",
     "ok": true,
-    "detail": "扫描 97 个文本文件，未发现凭证",
-    "checked": 97,
+    "detail": "扫描 103 个文本文件，未发现凭证",
+    "checked": 103,
     "failed": 0,
     "samples": []
   },
